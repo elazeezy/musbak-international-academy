@@ -6,12 +6,14 @@ export function Reveal({
   children,
   className = "",
   delay = 0,
+  as = "div",
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
+  as?: "div" | "span";
 }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -37,13 +39,17 @@ export function Reveal({
     return () => io.disconnect();
   }, []);
 
+  const Tag = as;
+
   return (
-    <div
-      ref={ref}
+    <Tag
+      ref={(el: HTMLElement | null) => {
+        ref.current = el;
+      }}
       className={`reveal ${visible ? "is-visible" : ""} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
-    </div>
+    </Tag>
   );
 }

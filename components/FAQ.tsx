@@ -34,7 +34,7 @@ export function FAQ() {
                 >
                   <button
                     onClick={() => setOpen(isOpen ? -1 : i)}
-                    className="flex w-full items-center justify-between gap-4 px-6 py-5 text-start"
+                    className="flex w-full items-center justify-between gap-4 px-6 py-5 text-start focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-golddeep"
                   >
                     <span className="text-sm font-bold sm:text-base">
                       {item.q}

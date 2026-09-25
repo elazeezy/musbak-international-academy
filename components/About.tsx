@@ -14,14 +14,17 @@ export function About() {
         <Reveal>
           <div className="relative mx-auto max-w-md">
             <div className="absolute -inset-8 rounded-full bg-gold/10 blur-3xl" />
-            <div className="relative overflow-hidden rounded-[2rem] border border-line bg-white p-10 pattern-star">
-              <Image
-                src="/musbak-logo.png"
-                alt="Musbak International Academy"
-                width={440}
-                height={260}
-                className="mx-auto w-full max-w-xs drop-shadow-2xl"
-              />
+            <Image
+              src="/images/tutor.jpg"
+              alt="A Musbak tutor teaching an online class"
+              width={1200}
+              height={1200}
+              className="relative aspect-square w-full rounded-3xl border border-line object-cover shadow-xl shadow-black/10"
+            />
+            <div className="absolute -bottom-4 start-2 animate-float-slow rounded-2xl border border-line bg-white px-5 py-3.5 shadow-xl shadow-black/10">
+              <p className="text-sm font-extrabold text-golddeep">
+                {t.about.badge}
+              </p>
             </div>
           </div>
         </Reveal>
@@ -35,16 +38,16 @@ export function About() {
               {t.about.title}
             </h2>
           </Reveal>
-          <Reveal delay={100}>
+          <Reveal delay={80}>
             <p className="mt-6 leading-relaxed text-muted">{t.about.p1}</p>
             <p className="mt-4 leading-relaxed text-muted">{t.about.p2}</p>
           </Reveal>
-          <Reveal delay={200}>
+          <Reveal delay={160}>
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
               {t.about.points.map((p) => (
                 <li
                   key={p}
-                  className="flex items-start gap-3 rounded-xl border border-line bg-white px-4 py-3.5 text-sm font-medium"
+                  className="flex items-start gap-3 rounded-lg border border-line bg-white px-4 py-3.5 text-sm font-medium"
                 >
                   <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
                   {p}

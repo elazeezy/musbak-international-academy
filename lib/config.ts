@@ -1,6 +1,9 @@
 export const site = {
   name: "Musbak International Academy",
   nameAr: "أكاديمية مسباك العالمية",
+  // Canonical site URL — single source of truth for metadata, sitemap, JSON-LD.
+  // Swap to the custom domain here when it's purchased.
+  url: "https://musbak-international-academy.vercel.app",
   // Primary WhatsApp line — used by all CTA buttons (country code + number, no "+")
   whatsapp: "966599748264",
   whatsappDisplay: "+966 59 974 8264",
@@ -10,6 +13,14 @@ export const site = {
   // YouTube embed URL for the hero video (VSL). Empty = show poster placeholder.
   // Example: "https://www.youtube.com/embed/VIDEO_ID"
   vslUrl: "",
+  // Per-locale intro videos (MP4 files in /public/videos) — take precedence
+  // over vslUrl for that locale. Add en/fr entries when their videos exist.
+  vslLocal: {
+    ar: {
+      src: "/videos/musbak-introductory-video-arabic.mp4",
+      duration: "0:51",
+    },
+  } as Record<string, { src: string; duration: string }>,
   socials: {
     instagram: "#",
     tiktok: "#",

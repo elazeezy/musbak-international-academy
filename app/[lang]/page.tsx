@@ -1,4 +1,7 @@
-import { LanguageProvider } from "@/lib/i18n";
+import { notFound } from "next/navigation";
+import { isLang } from "@/lib/dictionaries";
+import { faqJsonLd, jsonLdScriptTag } from "@/lib/seo";
+import { getDictionary } from "@/lib/dictionaries";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { Marquee } from "@/components/Marquee";
@@ -13,10 +16,25 @@ import { FAQ } from "@/components/FAQ";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { MobileBar } from "@/components/MobileBar";
 
-export default function Home() {
+export const dynamic = "force-static";
+
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang: raw } = await params;
+  if (!isLang(raw)) notFound();
+  const t = getDictionary(raw);
+
   return (
-    <LanguageProvider>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdScriptTag(faqJsonLd(t)) }}
+      />
       <Navbar />
       <main>
         <Hero />
@@ -33,6 +51,7 @@ export default function Home() {
       </main>
       <Footer />
       <WhatsAppFloat />
-    </LanguageProvider>
+      <MobileBar />
+    </>
   );
 }

@@ -3,6 +3,7 @@
 import { useLang } from "@/lib/i18n";
 import { waLink } from "@/lib/config";
 import { Reveal } from "./Reveal";
+import { RiskRow } from "./RiskRow";
 import { CheckIcon, WhatsAppIcon } from "./icons";
 
 export function Pricing() {
@@ -10,7 +11,6 @@ export function Pricing() {
 
   return (
     <section id="pricing" className="relative scroll-mt-24 bg-ink2 py-20 lg:py-28">
-      <div className="pattern-star absolute inset-0 opacity-40" />
       <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-golddeep">
@@ -24,16 +24,16 @@ export function Pricing() {
 
         <div className="mt-14 grid gap-6 lg:grid-cols-3">
           {t.pricing.plans.map((plan, i) => (
-            <Reveal key={plan.name} delay={i * 120}>
+            <Reveal key={plan.name} delay={i * 70}>
               <div
-                className={`relative flex h-full flex-col rounded-3xl border p-8 ${
+                className={`relative flex h-full flex-col rounded-2xl border p-8 ${
                   plan.popular
                     ? "border-gold bg-gradient-to-b from-gold/15 to-white shadow-2xl shadow-gold/15"
                     : "border-line bg-white"
                 }`}
               >
                 {plan.popular && (
-                  <span className="absolute -top-3.5 start-1/2 -translate-x-1/2 rounded-full bg-gold px-4 py-1 text-xs font-bold text-cream rtl:translate-x-1/2">
+                  <span className="mx-auto -mt-10 mb-5 block w-fit rounded-lg bg-gold px-4 py-1 text-xs font-bold text-cream">
                     {plan.badge}
                   </span>
                 )}
@@ -59,7 +59,7 @@ export function Pricing() {
                   href={waLink(t.wa.plan(plan.name))}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`mt-8 flex items-center justify-center gap-2 rounded-full py-3 text-sm font-bold transition-all ${
+                  className={`mt-8 flex items-center justify-center gap-2 rounded-full py-3 text-sm font-bold transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-golddeep ${
                     plan.popular
                       ? "bg-gold text-cream hover:bg-gold2 hover:shadow-lg hover:shadow-gold/25"
                       : "border border-line text-cream hover:border-gold hover:text-gold"
@@ -73,8 +73,9 @@ export function Pricing() {
           ))}
         </div>
 
-        <Reveal delay={200}>
-          <p className="mt-10 text-center text-sm text-muted">
+        <Reveal delay={140}>
+          <RiskRow className="mt-8 text-muted" />
+          <p className="mt-8 text-center text-sm text-muted">
             {t.pricing.note}
           </p>
           <p className="mt-2 text-center text-xs text-muted/70">
