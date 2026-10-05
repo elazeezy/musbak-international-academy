@@ -10,6 +10,9 @@ export const site = {
   whatsappSecondary: "2348103645835",
   whatsappSecondaryDisplay: "+234 810 364 5835",
   email: "Musbakinternational@gmail.com",
+  // Hero background video (MP4 in /public/videos). Empty = use the poster
+  // image fallback (/images/hero-poster.jpg).
+  heroVideo: "",
   // YouTube embed URL for the hero video (VSL). Empty = show poster placeholder.
   // Example: "https://www.youtube.com/embed/VIDEO_ID"
   vslUrl: "",

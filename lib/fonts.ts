@@ -1,4 +1,4 @@
-import { Sora, Cairo, Amiri } from "next/font/google";
+import { Sora, Cairo, Amiri, Fraunces } from "next/font/google";
 
 export const sora = Sora({
   variable: "--font-sora",
@@ -16,4 +16,10 @@ export const amiri = Amiri({
   weight: ["400", "700"],
 });
 
-export const fontVariables = `${sora.variable} ${cairo.variable} ${amiri.variable}`;
+/* Editorial display serif for major statements (Latin faces). */
+export const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+});
+
+export const fontVariables = `${sora.variable} ${cairo.variable} ${amiri.variable} ${fraunces.variable}`;

@@ -3,14 +3,16 @@ import { isLang } from "@/lib/dictionaries";
 import { faqJsonLd, jsonLdScriptTag } from "@/lib/seo";
 import { getDictionary } from "@/lib/dictionaries";
 import { Navbar } from "@/components/Navbar";
-import { Hero } from "@/components/Hero";
-import { Marquee } from "@/components/Marquee";
-import { About } from "@/components/About";
-import { Tracks } from "@/components/Tracks";
-import { HowItWorks } from "@/components/HowItWorks";
-import { HadithBanner } from "@/components/HadithBanner";
-import { WhyUs } from "@/components/WhyUs";
-import { Pricing } from "@/components/Pricing";
+import { HeroCinematic } from "@/components/HeroCinematic";
+import { VSLSection } from "@/components/VSLSection";
+import { TwoPaths } from "@/components/TwoPaths";
+import { Journey } from "@/components/Journey";
+import { ProofMosaic } from "@/components/ProofMosaic";
+import { QuranExperience } from "@/components/QuranExperience"; 
+import { Teachers } from "@/components/Teachers";
+import { GlobalClassroom } from "@/components/GlobalClassroom";
+import { PortalPreview } from "@/components/PortalPreview";
+import { WhyMusbak } from "@/components/WhyMusbak";
 import { Testimonials } from "@/components/Testimonials";
 import { FAQ } from "@/components/FAQ";
 import { FinalCTA } from "@/components/FinalCTA";
@@ -37,14 +39,16 @@ export default async function HomePage({
       />
       <Navbar />
       <main>
-        <Hero />
-        <Marquee />
-        <About />
-        <Tracks />
-        <HowItWorks />
-        <HadithBanner />
-        <WhyUs />
-        <Pricing />
+        <HeroCinematic />
+        <VSLSection />
+        <TwoPaths />
+        <Journey />
+        <ProofMosaic />
+        <QuranExperience />
+        <Teachers />
+        <GlobalClassroom />
+        <PortalPreview />
+        <WhyMusbak />
         <Testimonials />
         <FAQ />
         <FinalCTA />
