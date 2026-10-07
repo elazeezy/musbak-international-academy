@@ -15,29 +15,39 @@ export function HeroCinematic() {
 
   const isArabic = lang === "ar";
 
- const getVideoSrc = (value: unknown): string => {
-  if (typeof value === "string") {
-    return value;
-  }
+  /*
+   * ================================================================
+   * VIDEO SOURCE
+   * ================================================================
+   */
 
-  if (
-    value &&
-    typeof value === "object" &&
-    "src" in value &&
-    typeof value.src === "string"
-  ) {
-    return value.src;
-  }
+  const getVideoSrc = (value: unknown): string => {
+    if (typeof value === "string") {
+      return value;
+    }
 
-  return "";
-};
+    if (
+      value &&
+      typeof value === "object" &&
+      "src" in value &&
+      typeof value.src === "string"
+    ) {
+      return value.src;
+    }
 
-const vsl = getVideoSrc(
-  site.heroVideo ||
-    site.vslLocal?.[
-      lang as keyof typeof site.vslLocal
-    ],
-);
+    return "";
+  };
+
+  const vsl = getVideoSrc(
+    site.heroVideo ||
+      site.vslLocal?.[lang as keyof typeof site.vslLocal]
+  );
+
+  /*
+   * ================================================================
+   * ENTRANCE ANIMATION
+   * ================================================================
+   */
 
   const entrance = (delay: number) => ({
     initial: {
@@ -54,6 +64,12 @@ const vsl = getVideoSrc(
       ease: [0.22, 1, 0.36, 1] as const,
     },
   });
+
+  /*
+   * ================================================================
+   * SCROLL TO PROGRAM PATHS
+   * ================================================================
+   */
 
   const scrollToPaths = () => {
     document
@@ -72,16 +88,15 @@ const vsl = getVideoSrc(
         className="
           relative
           isolate
-          min-h-[780px]
+          min-h-[1040px]
           overflow-hidden
           bg-[#001A3F]
           lg:min-h-screen
         "
       >
-        {/* ========================================================
+        {/* ============================================================
             BACKGROUND — MOSQUE
-            Full bleed. NO container. NO grid.
-        ========================================================= */}
+            ============================================================ */}
 
         <div
           className="
@@ -109,7 +124,7 @@ const vsl = getVideoSrc(
             "
           />
 
-          {/* Blue Musbak color treatment */}
+          {/* Blue colour treatment */}
           <div
             className="
               absolute
@@ -119,7 +134,7 @@ const vsl = getVideoSrc(
             "
           />
 
-          {/* Deep navy overlay — keeps the hero branded */}
+          {/* Deep navy overlay */}
           <div
             className="
               absolute
@@ -128,7 +143,7 @@ const vsl = getVideoSrc(
             "
           />
 
-          {/* Stronger visibility on the right */}
+          {/* Right-side atmosphere */}
           <div
             className="
               absolute
@@ -142,17 +157,34 @@ const vsl = getVideoSrc(
             "
           />
 
-          {/* Protect the text area */}
+          {/* Desktop text protection */}
           <div
             className="
               absolute
               inset-y-0
               left-0
+              hidden
               w-[58%]
               bg-gradient-to-r
               from-[#001A3F]
               via-[#001A3F]/92
               to-transparent
+              lg:block
+            "
+          />
+
+          {/* Mobile text protection */}
+          <div
+            className="
+              absolute
+              inset-x-0
+              top-0
+              h-[620px]
+              bg-gradient-to-b
+              from-[#001A3F]
+              via-[#001A3F]/96
+              to-transparent
+              lg:hidden
             "
           />
 
@@ -169,7 +201,7 @@ const vsl = getVideoSrc(
             "
           />
 
-          {/* Bottom atmosphere */}
+          {/* Desktop bottom atmosphere */}
           <div
             className="
               absolute
@@ -183,7 +215,22 @@ const vsl = getVideoSrc(
             "
           />
 
-          {/* Cyan atmospheric glow behind child */}
+          {/* Mobile bottom atmosphere */}
+          <div
+            className="
+              absolute
+              inset-x-0
+              bottom-0
+              h-[430px]
+              bg-gradient-to-t
+              from-[#001A3F]
+              via-[#001A3F]/92
+              to-transparent
+              lg:hidden
+            "
+          />
+
+          {/* Cyan glow */}
           <div
             className="
               absolute
@@ -197,7 +244,23 @@ const vsl = getVideoSrc(
             "
           />
 
-          {/* Small secondary glow */}
+          {/* Mobile glow */}
+          <div
+            className="
+              absolute
+              bottom-[12%]
+              left-1/2
+              h-[360px]
+              w-[360px]
+              -translate-x-1/2
+              rounded-full
+              bg-[#35B8FF]/8
+              blur-[110px]
+              lg:hidden
+            "
+          />
+
+          {/* Secondary glow */}
           <div
             className="
               absolute
@@ -212,25 +275,124 @@ const vsl = getVideoSrc(
           />
         </div>
 
-        {/* ========================================================
-            MAIN HERO
-        ========================================================= */}
+        {/* ============================================================
+            DESKTOP CHILD
+           
+            English + French:
+              RIGHT
+
+            Arabic:
+              LEFT
+
+            No glass cards around the child.
+            ============================================================ */}
+
+        <div
+          className="
+            pointer-events-none
+            absolute
+            inset-0
+            z-20
+            hidden
+            lg:block
+          "
+        >
+          <motion.div
+            initial={{
+              opacity: 0,
+              scale: 0.96,
+              y: 20,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              y: 0,
+            }}
+            transition={{
+              duration: 1.1,
+              delay: 0.15,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className={`
+              absolute
+              bottom-[-35px]
+              h-[780px]
+              w-[760px]
+              ${
+                isArabic
+                  ? "left-[-2%] xl:left-[0%]"
+                  : "right-[-2%] xl:right-[0%]"
+              }
+              xl:h-[820px]
+              xl:w-[800px]
+            `}
+          >
+            <Image
+              src="/images/hero-child-cutout.png"
+              alt="A young student reading the Qur'an"
+              fill
+              priority
+              sizes="60vw"
+              className="
+                object-contain
+                object-bottom
+              "
+            />
+
+            {/* Subtle integration with the hero background */}
+            <div
+              className={`
+                absolute
+                inset-0
+                ${
+                  isArabic
+                    ? "bg-gradient-to-r from-transparent via-transparent to-[#001A3F]/10"
+                    : "bg-gradient-to-l from-transparent via-transparent to-[#001A3F]/10"
+                }
+              `}
+            />
+
+            {/* Fade the lower edge into the hero */}
+            <div
+              className="
+                absolute
+                inset-x-0
+                bottom-0
+                h-[190px]
+                bg-gradient-to-t
+                from-[#001A3F]
+                via-[#001A3F]/60
+                to-transparent
+              "
+            />
+          </motion.div>
+        </div>
+
+        {/* ============================================================
+            DESKTOP TEXT
+
+            English + French:
+              LEFT
+
+            Arabic:
+              RIGHT
+            ============================================================ */}
 
         <div
           className="
             relative
-            z-10
+            z-30
             mx-auto
             flex
-            min-h-[780px]
+            min-h-[1040px]
             w-full
             max-w-[1480px]
-            items-center
+            items-start
             px-5
-            pb-20
             pt-28
             sm:px-8
             lg:min-h-screen
+            lg:items-center
             lg:px-10
             lg:pb-14
             lg:pt-24
@@ -238,657 +400,347 @@ const vsl = getVideoSrc(
           "
         >
           <div
-            className="
-              grid
+            className={`
               w-full
-              items-center
-              lg:grid-cols-[0.88fr_1.12fr]
-              xl:grid-cols-[0.86fr_1.14fr]
-            "
+              max-w-[620px]
+              lg:w-[48%]
+              ${
+                isArabic
+                  ? "lg:ml-auto lg:mr-0 text-right"
+                  : "lg:ml-0 lg:mr-auto text-left"
+              }
+            `}
           >
-            {/* ====================================================
-                LEFT — TEXT
-            ===================================================== */}
+            {/* ========================================================
+                EYEBROW
+                ======================================================== */}
 
-            <div
-              className="
-                relative
-                z-40
-                max-w-[620px]
-                lg:pb-12
-              "
-            >
-              {/* Eyebrow */}
-              <motion.div {...entrance(0)}>
-                <span
-                  className="
-                    inline-flex
-                    items-center
-                    gap-3
-                    text-[10px]
-                    font-semibold
-                    uppercase
-                    tracking-[0.28em]
-                    text-[#35B8FF]
-                    sm:text-[11px]
-                  "
-                >
-                  <span className="h-px w-8 bg-[#35B8FF]" />
-                  {h.kicker}
-                </span>
-              </motion.div>
-
-              {/* Headline */}
-              <motion.h1
-                {...entrance(0.08)}
-                className="
-                  mt-7
-                  max-w-[610px]
-                  font-display
-                  text-[clamp(3rem,5vw,5.2rem)]
-                  font-semibold
-                  leading-[0.98]
-                  tracking-[-0.045em]
-                  text-white
-                "
-              >
-                <span className="block">
-                  {h.line1}
-                </span>
-
-                <span className="block text-[#35B8FF]">
-                  {h.line2}
-                </span>
-              </motion.h1>
-
-              {/* Supporting text */}
-              <motion.p
-                {...entrance(0.16)}
-                className="
-                  mt-7
-                  max-w-[535px]
-                  text-[15px]
-                  leading-7
-                  text-white/65
-                  sm:text-base
-                "
-              >
-                {h.sub}
-              </motion.p>
-
-              {/* Buttons */}
-              <motion.div
-                {...entrance(0.24)}
-                className="
-                  mt-9
-                  flex
-                  flex-col
-                  gap-3
-                  sm:flex-row
-                "
-              >
-                <button
-                  type="button"
-                  onClick={scrollToPaths}
-                  className="
-                    group
-                    inline-flex
-                    h-12
-                    items-center
-                    justify-center
-                    gap-3
-                    rounded-full
-                    bg-[#35B8FF]
-                    px-6
-                    text-sm
-                    font-bold
-                    text-[#001A3F]
-                    shadow-[0_15px_50px_rgba(53,184,255,0.18)]
-                    transition-all
-                    duration-300
-                    hover:-translate-y-0.5
-                    hover:bg-white
-                    focus-visible:outline-none
-                    focus-visible:ring-2
-                    focus-visible:ring-[#35B8FF]
-                    focus-visible:ring-offset-2
-                    focus-visible:ring-offset-[#001A3F]
-                  "
-                >
-                  {h.primary}
-
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    aria-hidden="true"
-                    className={isArabic ? "rotate-180" : ""}
-                  >
-                    <path
-                      d="M3.5 8h8M8.5 4.5 12 8l-3.5 3.5"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-
-                <a
-                  href={waLink(t.wa.trial)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="
-                    inline-flex
-                    h-12
-                    items-center
-                    justify-center
-                    rounded-full
-                    border
-                    border-white/15
-                    bg-white/[0.025]
-                    px-6
-                    text-sm
-                    font-semibold
-                    text-white/90
-                    backdrop-blur-md
-                    transition-all
-                    duration-300
-                    hover:border-white/30
-                    hover:bg-white/[0.07]
-                    focus-visible:outline-none
-                    focus-visible:ring-2
-                    focus-visible:ring-white
-                    focus-visible:ring-offset-2
-                    focus-visible:ring-offset-[#001A3F]
-                  "
-                >
-                  {h.secondary}
-                </a>
-              </motion.div>
-            </div>
-
-            {/* ====================================================
-                RIGHT — CHILD FLOATING DIRECTLY IN HERO
-                NO FRAME
-                NO IMAGE CARD
-                NO RECTANGLE
-            ===================================================== */}
-
-            <div
-              className="
-                pointer-events-none
-                absolute
-                inset-y-0
-                right-0
-                z-20
-                hidden
-                w-[64%]
-                lg:block
-              "
-            >
-              {/* Child cutout */}
-
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  scale: 0.96,
-                  y: 20,
-                }}
-                animate={{
-                  opacity: 1,
-                  scale: 1,
-                  y: 0,
-                }}
-                transition={{
-                  duration: 1.1,
-                  delay: 0.15,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="
-                  absolute
-                  bottom-[-35px]
-                  right-[-2%]
-                  h-[780px]
-                  w-[760px]
-                  xl:right-[1%]
-                  xl:h-[820px]
-                  xl:w-[800px]
-                "
-              >
-                <Image
-                  src="/images/hero-child-cutout.png"
-                  alt="A young student reading the Qur'an"
-                  fill
-                  priority
-                  sizes="60vw"
-                  className="
-                    object-contain
-                    object-bottom
-                  "
-                />
-
-                {/* Subtle blue integration over the cutout */}
-                <div
-                  className="
-                    absolute
-                    inset-0
-                    bg-gradient-to-l
-                    from-transparent
-                    via-transparent
-                    to-[#001A3F]/12
-                  "
-                />
-
-                {/* Bottom fade */}
-                <div
-                  className="
-                    absolute
-                    inset-x-0
-                    bottom-0
-                    h-[190px]
-                    bg-gradient-to-t
-                    from-[#001A3F]
-                    via-[#001A3F]/60
-                    to-transparent
-                  "
-                />
-              </motion.div>
-
-              {/* ==================================================
-                  GLASS — PERSONALIZED LEARNING
-              =================================================== */}
-
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  x: -12,
-                }}
-                animate={{
-                  opacity: 1,
-                  x: 0,
-                }}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.65,
-                }}
-                className="
-                  pointer-events-auto
-                  absolute
-                  left-[2%]
-                  top-[35%]
-                  z-40
-                  w-[205px]
-                  rounded-2xl
-                  border
-                  border-white/20
-                  bg-[#102A4D]/45
-                  p-3
-                  shadow-[0_20px_60px_rgba(0,0,0,0.22)]
-                  backdrop-blur-xl
-                "
-              >
-                <div className="flex items-center gap-3">
-                  <div
-                    className="
-                      flex
-                      h-10
-                      w-10
-                      shrink-0
-                      items-center
-                      justify-center
-                      rounded-xl
-                      bg-[#35B8FF]/15
-                      text-[#35B8FF]
-                    "
-                  >
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M9 2.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7ZM3 15.5c.7-2.6 2.5-3.9 6-3.9s5.3 1.3 6 3.9"
-                        stroke="currentColor"
-                        strokeWidth="1.4"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </div>
-
-                  <div>
-                    <p className="text-[11px] font-bold text-white">
-                      Personalized
-                    </p>
-
-                    <p className="mt-0.5 text-[9px] text-white/50">
-                      Learning
-                    </p>
-
-                    <p className="mt-1 text-[8px] text-white/35">
-                      One-to-one or small groups
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* ==================================================
-                  GLASS — QUALIFIED TUTORS
-              =================================================== */}
-
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  x: 12,
-                }}
-                animate={{
-                  opacity: 1,
-                  x: 0,
-                }}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.8,
-                }}
-                className="
-                  pointer-events-auto
-                  absolute
-                  right-[1%]
-                  top-[46%]
-                  z-40
-                  w-[205px]
-                  rounded-2xl
-                  border
-                  border-white/20
-                  bg-[#102A4D]/45
-                  p-3
-                  shadow-[0_20px_60px_rgba(0,0,0,0.22)]
-                  backdrop-blur-xl
-                "
-              >
-                <div className="flex items-center gap-3">
-                  <div
-                    className="
-                      flex
-                      h-10
-                      w-10
-                      shrink-0
-                      items-center
-                      justify-center
-                      rounded-xl
-                      bg-[#35B8FF]/15
-                      text-[#35B8FF]
-                    "
-                  >
-                    <svg
-                      width="19"
-                      height="19"
-                      viewBox="0 0 19 19"
-                      fill="none"
-                    >
-                      <path
-                        d="M3.5 7.2 9.5 3l6 4.2-6 4.1-6-4.1Z"
-                        stroke="currentColor"
-                        strokeWidth="1.4"
-                        strokeLinejoin="round"
-                      />
-
-                      <path
-                        d="M5.5 9.1v3.2c0 1.3 1.8 2.5 4 2.5s4-1.2 4-2.5V9.1"
-                        stroke="currentColor"
-                        strokeWidth="1.4"
-                      />
-                    </svg>
-                  </div>
-
-                  <div>
-                    <p className="text-[11px] font-bold text-white">
-                      Qualified Tutors
-                    </p>
-
-                    <p className="mt-0.5 text-[9px] text-white/50">
-                      Experienced and certified
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* ==================================================
-                  GLASS — GLOBAL COMMUNITY
-              =================================================== */}
-
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  y: 12,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.92,
-                }}
-                className="
-                  pointer-events-auto
-                  absolute
-                  bottom-[13%]
-                  left-[11%]
-                  z-40
-                  w-[190px]
-                  rounded-2xl
-                  border
-                  border-white/20
-                  bg-[#102A4D]/45
-                  p-3
-                  shadow-[0_20px_60px_rgba(0,0,0,0.22)]
-                  backdrop-blur-xl
-                "
-              >
-                <div className="flex items-center gap-3">
-                  <div
-                    className="
-                      flex
-                      h-10
-                      w-10
-                      shrink-0
-                      items-center
-                      justify-center
-                      rounded-xl
-                      bg-[#35B8FF]/15
-                      text-[#35B8FF]
-                    "
-                  >
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <circle
-                        cx="9"
-                        cy="9"
-                        r="6.5"
-                        stroke="currentColor"
-                        strokeWidth="1.3"
-                      />
-
-                      <path
-                        d="M2.8 9h12.4M9 2.5c1.5 1.7 2.3 3.9 2.3 6.5S10.5 13.8 9 15.5M9 2.5C7.5 4.2 6.7 6.4 6.7 9s.8 4.8 2.3 6.5"
-                        stroke="currentColor"
-                        strokeWidth="1.1"
-                      />
-                    </svg>
-                  </div>
-
-                  <div>
-                    <p className="text-[11px] font-bold text-white">
-                      Global Community
-                    </p>
-
-                    <p className="mt-0.5 text-[9px] leading-4 text-white/50">
-                      Students from around the world
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* ==================================================
-                  VSL
-              =================================================== */}
-
-              <motion.button
-                type="button"
-                onClick={() => {
-                  if (vsl) {
-                    setVslOpen(true);
-                  } else {
-                    scrollToPaths();
-                  }
-                }}
-                initial={{
-                  opacity: 0,
-                  y: 15,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                transition={{
-                  duration: 0.7,
-                  delay: 1,
-                }}
-                className="
-                  pointer-events-auto
-                  group
-                  absolute
-                  bottom-[1%]
-                  right-[4%]
-                  z-50
-                  flex
-                  w-[430px]
+            <motion.div {...entrance(0)}>
+              <span
+                className={`
+                  inline-flex
                   items-center
                   gap-3
-                  rounded-2xl
-                  border
-                  border-white/15
-                  bg-[#001A3F]/70
-                  p-2.5
-                  text-left
-                  shadow-[0_20px_70px_rgba(0,0,0,0.3)]
-                  backdrop-blur-xl
+                  text-[10px]
+                  font-semibold
+                  uppercase
+                  tracking-[0.28em]
+                  text-[#35B8FF]
+                  sm:text-[11px]
+                  ${
+                    isArabic
+                      ? "flex-row-reverse"
+                      : "flex-row"
+                  }
+                `}
+              >
+                <span className="h-px w-8 bg-[#35B8FF]" />
+
+                {h.kicker}
+              </span>
+            </motion.div>
+
+            {/* ========================================================
+                HEADLINE
+                ======================================================== */}
+
+            <motion.h1
+              {...entrance(0.08)}
+              className="
+                mt-7
+                max-w-[610px]
+                font-display
+                text-[clamp(3rem,5vw,5.2rem)]
+                font-semibold
+                leading-[0.98]
+                tracking-[-0.045em]
+                text-white
+              "
+            >
+              <span className="block">
+                {h.line1}
+              </span>
+
+              <span className="block text-[#35B8FF]">
+                {h.line2}
+              </span>
+            </motion.h1>
+
+            {/* ========================================================
+                SUPPORTING COPY
+                ======================================================== */}
+
+            <motion.p
+              {...entrance(0.16)}
+              className="
+                mt-7
+                max-w-[535px]
+                text-[15px]
+                leading-7
+                text-white/65
+                sm:text-base
+              "
+            >
+              {h.sub}
+            </motion.p>
+
+            {/* ========================================================
+                BUTTONS
+                ======================================================== */}
+
+            <motion.div
+              {...entrance(0.24)}
+              className={`
+                mt-9
+                flex
+                flex-col
+                gap-3
+                sm:flex-row
+                ${
+                  isArabic
+                    ? "sm:flex-row-reverse"
+                    : "sm:flex-row"
+                }
+              `}
+            >
+              {/* Primary */}
+              <button
+                type="button"
+                onClick={scrollToPaths}
+                className="
+                  group
+                  inline-flex
+                  h-12
+                  items-center
+                  justify-center
+                  gap-3
+                  rounded-full
+                  bg-[#35B8FF]
+                  px-6
+                  text-sm
+                  font-bold
+                  text-[#001A3F]
+                  shadow-[0_15px_50px_rgba(53,184,255,0.18)]
                   transition-all
                   duration-300
-                  hover:border-[#35B8FF]/40
-                  hover:bg-[#001A3F]/85
+                  hover:-translate-y-0.5
+                  hover:bg-white
                   focus-visible:outline-none
                   focus-visible:ring-2
                   focus-visible:ring-[#35B8FF]
+                  focus-visible:ring-offset-2
+                  focus-visible:ring-offset-[#001A3F]
                 "
               >
-                <span
-                  className="
-                    flex
-                    h-11
-                    w-11
-                    shrink-0
-                    items-center
-                    justify-center
-                    rounded-full
-                    bg-[#35B8FF]
-                    text-[#001A3F]
-                    transition-transform
-                    duration-300
-                    group-hover:scale-105
-                  "
-                >
-                  <svg
-                    width="13"
-                    height="13"
-                    viewBox="0 0 13 13"
-                    fill="none"
-                  >
-                    <path
-                      d="M4 2.4 10 6.5 4 10.6V2.4Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </span>
-
-                <span className="min-w-0 flex-1">
-                  <span className="block text-xs font-semibold text-white">
-                    See Musbak in action
-                  </span>
-
-                  <span className="mt-0.5 block text-[9px] text-white/45">
-                    A glimpse into the learning experience
-                  </span>
-                </span>
+                {h.primary}
 
                 <svg
-                  width="15"
-                  height="15"
-                  viewBox="0 0 15 15"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
                   fill="none"
-                  className="mr-2 text-white/35 transition-all group-hover:translate-x-0.5 group-hover:text-[#35B8FF]"
+                  aria-hidden="true"
+                  className={isArabic ? "rotate-180" : ""}
                 >
                   <path
-                    d="m5.5 3.5 4 4-4 4"
+                    d="M3.5 8h8M8.5 4.5 12 8l-3.5 3.5"
                     stroke="currentColor"
-                    strokeWidth="1.4"
+                    strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                 </svg>
-              </motion.button>
-            </div>
+              </button>
+
+              {/* Secondary */}
+              <a
+                href={waLink(t.wa.trial)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  inline-flex
+                  h-12
+                  items-center
+                  justify-center
+                  rounded-full
+                  border
+                  border-white/15
+                  bg-white/[0.025]
+                  px-6
+                  text-sm
+                  font-semibold
+                  text-white/90
+                  backdrop-blur-md
+                  transition-all
+                  duration-300
+                  hover:border-white/30
+                  hover:bg-white/[0.07]
+                  focus-visible:outline-none
+                  focus-visible:ring-2
+                  focus-visible:ring-white
+                  focus-visible:ring-offset-2
+                  focus-visible:ring-offset-[#001A3F]
+                "
+              >
+                {h.secondary}
+              </a>
+            </motion.div>
           </div>
         </div>
 
-        {/* ========================================================
+        {/* ============================================================
             MOBILE CHILD
-        ========================================================= */}
+
+            Mobile is intentionally a different composition.
+            ============================================================ */}
 
         <div
           className="
             pointer-events-none
             absolute
             bottom-0
-            right-[-20%]
-            z-10
+            left-1/2
+            z-20
             block
-            h-[430px]
-            w-[540px]
-            opacity-90
+            h-[400px]
+            w-[470px]
+            -translate-x-1/2
             lg:hidden
           "
         >
-          <Image
-            src="/images/hero-child-cutout.png"
-            alt=""
-            fill
-            sizes="90vw"
-            className="object-contain object-bottom"
-          />
-
-          <div
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 30,
+              scale: 0.96,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+            }}
+            transition={{
+              duration: 1,
+              delay: 0.3,
+              ease: [0.22, 1, 0.36, 1],
+            }}
             className="
-              absolute
-              inset-x-0
-              bottom-0
-              h-32
-              bg-gradient-to-t
-              from-[#001A3F]
-              to-transparent
+              relative
+              h-full
+              w-full
             "
-          />
+          >
+            <Image
+              src="/images/hero-child-cutout.png"
+              alt="A young student reading the Qur'an"
+              fill
+              priority
+              sizes="90vw"
+              className="
+                object-contain
+                object-bottom
+              "
+            />
+
+            <div
+              className="
+                absolute
+                inset-x-0
+                bottom-0
+                h-[150px]
+                bg-gradient-to-t
+                from-[#001A3F]
+                via-[#001A3F]/70
+                to-transparent
+              "
+            />
+          </motion.div>
         </div>
 
-        {/* ========================================================
+        {/* ============================================================
+            MOBILE VSL
+            ============================================================ */}
+
+        <motion.button
+          type="button"
+          onClick={() => {
+            if (vsl) {
+              setVslOpen(true);
+            } else {
+              scrollToPaths();
+            }
+          }}
+          initial={{
+            opacity: 0,
+            y: 12,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 0.7,
+            delay: 0.9,
+          }}
+          className="
+            absolute
+            bottom-[385px]
+            left-1/2
+            z-50
+            flex
+            -translate-x-1/2
+            items-center
+            gap-2
+            rounded-full
+            border
+            border-white/15
+            bg-[#001A3F]/65
+            px-4
+            py-2.5
+            text-[10px]
+            font-semibold
+            uppercase
+            tracking-[0.16em]
+            text-white/75
+            backdrop-blur-xl
+            transition
+            hover:border-[#35B8FF]/40
+            hover:text-white
+            lg:hidden
+          "
+        >
+          <span
+            className="
+              flex
+              h-6
+              w-6
+              items-center
+              justify-center
+              rounded-full
+              bg-[#35B8FF]
+              text-[#001A3F]
+            "
+          >
+            <svg
+              width="9"
+              height="9"
+              viewBox="0 0 9 9"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M2.7 1.4 7 4.5 2.7 7.6V1.4Z"
+                fill="currentColor"
+              />
+            </svg>
+          </span>
+
+          {vsl ? "Watch our story" : "See Musbak in action"}
+        </motion.button>
+
+        {/* ============================================================
             VSL MODAL
-        ========================================================= */}
+            ============================================================ */}
 
         <AnimatePresence>
           {vslOpen && vsl && (
@@ -937,9 +789,7 @@ const vsl = getVideoSrc(
                   bg-black
                   shadow-2xl
                 "
-                onClick={(event) =>
-                  event.stopPropagation()
-                }
+                onClick={(event) => event.stopPropagation()}
               >
                 <button
                   type="button"
@@ -971,7 +821,11 @@ const vsl = getVideoSrc(
                   controls
                   autoPlay
                   playsInline
-                  className="aspect-video w-full bg-black"
+                  className="
+                    aspect-video
+                    w-full
+                    bg-black
+                  "
                 />
               </motion.div>
             </motion.div>
