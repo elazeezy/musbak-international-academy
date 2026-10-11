@@ -86,7 +86,7 @@ export function WhyMusbak() {
         ======================================================= */}
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.35 }}
           transition={{
@@ -146,10 +146,7 @@ export function WhyMusbak() {
             {why.items.map((item, index) => (
               <motion.article
                 key={item.title}
-                initial={{
-                  opacity: 0,
-                  y: 30,
-                }}
+                initial={false}
                 whileInView={{
                   opacity: 1,
                   y: 0,
@@ -208,7 +205,7 @@ export function WhyMusbak() {
         ======================================================= */}
 
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{

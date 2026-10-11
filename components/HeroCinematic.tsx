@@ -21,7 +21,7 @@ export function HeroCinematic() {
    */
 
   const entrance = (delay: number) => ({
-    initial: reduceMotion ? false : { opacity: 0, y: 18 },
+    initial: false,
     animate: {
       opacity: 1,
       y: 0,
@@ -109,7 +109,7 @@ export function HeroCinematic() {
         >
           {/* Mosque photograph */}
           <Image
-            src="/images/hero-mosque.jpg"
+            src="/images/hero-mosque.webp"
             alt=""
             fill
             loading="eager"
@@ -508,7 +508,7 @@ export function HeroCinematic() {
         {/* Mobile composition: copy and actions occupy their own flow above the learner. */}
         <div className="relative z-30 mx-auto w-full max-w-[680px] px-5 pb-0 pt-[88px] sm:px-8 lg:hidden">
           <motion.div
-            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
           >
@@ -553,7 +553,7 @@ export function HeroCinematic() {
         </div>
 
         <motion.figure
-          initial={reduceMotion ? false : { opacity: 0, y: 14, scale: 0.98 }}
+          initial={false}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, delay: reduceMotion ? 0 : 0.12, ease: [0.22, 1, 0.36, 1] }}
           className="relative z-20 mx-auto mt-0 h-[min(100vw,420px)] w-full max-w-[520px] lg:pointer-events-none lg:absolute lg:inset-0 lg:mx-auto lg:min-h-full lg:max-w-[1480px]"
@@ -564,7 +564,7 @@ export function HeroCinematic() {
             }`}
           >
             <Image
-              src="/images/hero-child-cutout.png"
+              src="/images/hero-child-cutout.webp"
               alt={lang === "ar" ? "طفل يقرأ القرآن الكريم" : lang === "fr" ? "Un enfant lit le Coran" : "A young student reading the Qur’an"}
               fill
               loading="eager"

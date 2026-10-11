@@ -72,7 +72,7 @@ export function FAQ() {
         ======================================================= */}
 
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.35 }}
           transition={{
@@ -113,10 +113,7 @@ export function FAQ() {
             return (
               <motion.div
                 key={item.q}
-                initial={{
-                  opacity: 0,
-                  y: 18,
-                }}
+                initial={false}
                 whileInView={{
                   opacity: 1,
                   y: 0,
@@ -175,10 +172,7 @@ export function FAQ() {
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
-                      initial={{
-                        height: 0,
-                        opacity: 0,
-                      }}
+                      initial={{ height: 0, opacity: 0 }}
                       animate={{
                         height: "auto",
                         opacity: 1,
@@ -217,10 +211,7 @@ export function FAQ() {
         ======================================================= */}
 
         <motion.div
-          initial={{
-            opacity: 0,
-            y: 15,
-          }}
+          initial={false}
           whileInView={{
             opacity: 1,
             y: 0,
@@ -281,7 +272,7 @@ export function FAQ() {
         ======================================================= */}
 
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={false}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.5 }}

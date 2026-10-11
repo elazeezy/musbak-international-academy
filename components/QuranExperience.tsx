@@ -193,11 +193,7 @@ export function QuranExperience() {
           ===================================================== */}
 
           <motion.div
-            initial={{
-              opacity: 0,
-              x: isArabic ? 45 : -45,
-              scale: 0.96,
-            }}
+            initial={false}
             whileInView={{
               opacity: 1,
               x: 0,
@@ -231,7 +227,7 @@ export function QuranExperience() {
               className="relative z-10 w-[78%] max-w-[500px] sm:w-[65%] lg:w-[105%] lg:max-w-[560px]"
             >
               <Image
-                src="/images/quran-feature.png"
+                src="/images/quran-feature.webp"
                 alt={
                   isArabic
                     ? "القرآن الكريم مفتوحًا على رحل"
@@ -246,7 +242,7 @@ export function QuranExperience() {
 
             {/* Tiny floating label */}
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.55, duration: 0.5 }}
@@ -275,7 +271,7 @@ export function QuranExperience() {
           >
             {/* Kicker */}
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
@@ -293,7 +289,7 @@ export function QuranExperience() {
             =================================================== */}
 
             <motion.div
-              initial={{ opacity: 0, y: 18 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.65, delay: 0.05 }}
@@ -321,7 +317,7 @@ export function QuranExperience() {
             =================================================== */}
 
             <motion.div
-              initial={{ opacity: 0, y: 18 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.65, delay: 0.12 }}
@@ -347,10 +343,7 @@ export function QuranExperience() {
                 {items.map((item, index) => (
                   <motion.div
                     key={`${item.name}-${index}`}
-                    initial={{
-                      opacity: 0,
-                      y: 18,
-                    }}
+                    initial={false}
                     whileInView={{
                       opacity: 1,
                       y: 0,

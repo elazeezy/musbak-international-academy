@@ -213,21 +213,21 @@ export function TwoPaths() {
     {
       title: copy.quran,
       items: copy.quranItems,
-      image: "/images/hero-child-cutout.png",
+      image: "/images/hero-child-cutout.webp",
       imagePosition: "right bottom",
       icon: <BookIcon />,
     },
     {
       title: copy.arabic,
       items: copy.arabicItems,
-      image: "/images/hero-mosque.jpg",
+      image: "/images/hero-mosque.webp",
       imagePosition: "center",
       icon: <span className="font-serif text-2xl font-bold">ع</span>,
     },
     {
       title: copy.islamic,
       items: copy.islamicItems,
-      image: "/images/hero-mosque.jpg",
+      image: "/images/hero-mosque.webp",
       imagePosition: "center right",
       icon: (
         <svg
@@ -372,7 +372,7 @@ export function TwoPaths() {
               {cards.map((card, index) => (
                 <motion.article
                   key={card.title}
-                  initial={{ opacity: 0, y: 24 }}
+                  initial={false}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{

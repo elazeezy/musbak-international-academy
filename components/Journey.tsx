@@ -216,7 +216,7 @@ export function Journey() {
 
         <div className="mx-auto max-w-3xl text-center">
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.6 }}
@@ -282,7 +282,7 @@ export function Journey() {
               return (
                 <motion.div
                   key={step.num}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={false}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.35 }}
                   transition={{
@@ -392,7 +392,7 @@ export function Journey() {
 
           {/* Bottom label */}
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={false}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 1 }}
@@ -434,10 +434,7 @@ export function Journey() {
               return (
                 <motion.div
                   key={step.num}
-                  initial={{
-                    opacity: 0,
-                    x: isArabic ? 25 : -25,
-                  }}
+                  initial={false}
                   whileInView={{
                     opacity: 1,
                     x: 0,

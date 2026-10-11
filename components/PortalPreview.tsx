@@ -834,7 +834,7 @@ export function PortalPreview() {
         ======================================================= */}
 
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.65 }}
@@ -864,7 +864,7 @@ export function PortalPreview() {
         ======================================================= */}
 
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.15, duration: 0.55 }}
@@ -914,11 +914,7 @@ export function PortalPreview() {
         ======================================================= */}
 
         <motion.div
-          initial={{
-            opacity: 0,
-            y: 35,
-            scale: 0.985,
-          }}
+          initial={false}
           whileInView={{
             opacity: 1,
             y: 0,
@@ -1022,10 +1018,7 @@ export function PortalPreview() {
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={current.label}
-                      initial={{
-                        opacity: 0,
-                        y: 12,
-                      }}
+                      initial={false}
                       animate={{
                         opacity: 1,
                         y: 0,
@@ -1072,7 +1065,7 @@ export function PortalPreview() {
         ======================================================= */}
 
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={false}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.45, duration: 0.6 }}

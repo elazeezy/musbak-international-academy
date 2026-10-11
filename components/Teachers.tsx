@@ -246,7 +246,7 @@ export function Teachers() {
 
         <div className="mx-auto max-w-3xl text-center">
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.6 }}
@@ -280,7 +280,7 @@ export function Teachers() {
           <div className="pointer-events-none absolute inset-y-0 left-0 right-0 hidden items-center justify-between lg:flex">
             {/* Previous */}
             <motion.div
-              initial={{ opacity: 0 }}
+              initial={false}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               className={`relative h-[300px] w-[180px] overflow-hidden rounded-[28px] border border-white/80 bg-white/60 opacity-70 shadow-[0_15px_50px_rgba(0,50,90,0.06)] ${
@@ -307,7 +307,7 @@ export function Teachers() {
 
             {/* Next */}
             <motion.div
-              initial={{ opacity: 0 }}
+              initial={false}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               className="relative h-[300px] w-[180px] overflow-hidden rounded-[28px] border border-white/80 bg-white/60 opacity-70 shadow-[0_15px_50px_rgba(0,50,90,0.06)]"
@@ -344,11 +344,7 @@ export function Teachers() {
               <motion.div
                 key={teacher.name}
                 custom={direction}
-                initial={{
-                  opacity: 0,
-                  x: direction * 80,
-                  scale: 0.97,
-                }}
+                initial={false}
                 animate={{
                   opacity: 1,
                   x: 0,
@@ -555,7 +551,7 @@ export function Teachers() {
         ======================================================= */}
 
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.2 }}

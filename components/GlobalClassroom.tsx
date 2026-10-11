@@ -437,7 +437,7 @@ export function GlobalClassroom() {
         ======================================================= */}
 
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.65 }}
@@ -472,7 +472,7 @@ export function GlobalClassroom() {
           ===================================================== */}
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
+            initial={false}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{
@@ -494,10 +494,7 @@ export function GlobalClassroom() {
           ===================================================== */}
 
           <motion.div
-            initial={{
-              opacity: 0,
-              x: isArabic ? -25 : 25,
-            }}
+            initial={false}
             whileInView={{
               opacity: 1,
               x: 0,
@@ -527,10 +524,7 @@ export function GlobalClassroom() {
                 {regions.map((region, index) => (
                   <motion.li
                     key={region}
-                    initial={{
-                      opacity: 0,
-                      x: isArabic ? 12 : -12,
-                    }}
+                    initial={false}
                     whileInView={{
                       opacity: 1,
                       x: 0,
@@ -564,7 +558,7 @@ export function GlobalClassroom() {
                 ))}
 
                 <motion.li
-                  initial={{ opacity: 0 }}
+                  initial={false}
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.9 }}
@@ -588,7 +582,7 @@ export function GlobalClassroom() {
         ======================================================= */}
 
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.6 }}

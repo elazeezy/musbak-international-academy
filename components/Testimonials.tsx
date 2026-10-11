@@ -156,7 +156,7 @@ export function Testimonials() {
         ======================================================= */}
 
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.6 }}
@@ -191,10 +191,7 @@ export function Testimonials() {
           <AnimatePresence mode="wait">
             <motion.div
               key={active}
-              initial={{
-                opacity: 0,
-                y: 12,
-              }}
+              initial={false}
               animate={{
                 opacity: 1,
                 y: 0,
@@ -221,10 +218,7 @@ export function Testimonials() {
                 return (
                   <motion.article
                     key={`${item.name}-${active}-${index}`}
-                    initial={{
-                      opacity: 0,
-                      y: 15,
-                    }}
+                    initial={false}
                     animate={{
                       opacity: 1,
                       y: 0,
@@ -362,7 +356,7 @@ export function Testimonials() {
         ========================================================= */}
 
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={false}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.5 }}

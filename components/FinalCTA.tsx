@@ -50,7 +50,7 @@ export function FinalCTA() {
           className="absolute -inset-[5%]"
         >
           <Image
-            src="/images/hero-mosque.jpg"
+            src="/images/hero-mosque.webp"
             alt=""
             fill
             sizes="100vw"
@@ -91,10 +91,7 @@ export function FinalCTA() {
 
       <div className="relative z-10 flex min-h-[480px] items-center justify-center px-5 py-24 sm:min-h-[520px] sm:px-8 lg:min-h-[560px] lg:px-12">
         <motion.div
-          initial={{
-            opacity: 0,
-            y: 25,
-          }}
+          initial={false}
           whileInView={{
             opacity: 1,
             y: 0,

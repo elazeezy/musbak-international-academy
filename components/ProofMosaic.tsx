@@ -141,7 +141,7 @@ function VideoTile({
 
   return (
     <motion.figure
-      initial={{ opacity: 0, y: 25 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{
@@ -209,7 +209,7 @@ function ImageTile({
 }) {
   return (
     <motion.figure
-      initial={{ opacity: 0, y: 25 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{
@@ -247,7 +247,7 @@ function PlaceholderTile({
 }) {
   return (
     <motion.figure
-      initial={{ opacity: 0, y: 25 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{
@@ -358,7 +358,7 @@ export function ProofMosaic() {
         <div className="grid items-end gap-7 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           {/* Left */}
           <motion.div
-            initial={{ opacity: 0, x: isArabic ? 20 : -20 }}
+            initial={false}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.65 }}
@@ -382,7 +382,7 @@ export function ProofMosaic() {
 
           {/* Right */}
           <motion.div
-            initial={{ opacity: 0, x: isArabic ? -20 : 20 }}
+            initial={false}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.65, delay: 0.1 }}
@@ -460,7 +460,7 @@ export function ProofMosaic() {
         ======================================================= */}
 
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={false}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.6 }}
