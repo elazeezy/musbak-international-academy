@@ -1,6 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
+  "crons": [
+    { "path": "/api/cron/academy", "schedule": "5 0 * * *" }
+  ],
   "headers": [
     {
       "source": "/_next/static/(.*)",

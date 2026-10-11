@@ -128,20 +128,6 @@ function SearchIcon() {
   );
 }
 
-function ChevronIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      className="h-4 w-4"
-    >
-      <path d="m9 18 6-6-6-6" />
-    </svg>
-  );
-}
-
 function CalendarIcon() {
   return (
     <svg
@@ -644,7 +630,7 @@ function ParentDashboard({
             <div>
               <p className="text-[8px] font-bold">Ustadh Ahmad</p>
               <p className="text-[7px] text-white/45">
-                Qur'an • Tajweed
+                Qur&apos;an • Tajweed
               </p>
             </div>
           </div>

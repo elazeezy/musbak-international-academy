@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLang } from "@/lib/i18n";
 import { site } from "@/lib/config";
 
@@ -42,32 +42,51 @@ function CloseIcon() {
 export function VSLSection() {
   const { lang } = useLang();
   const [open, setOpen] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   const isArabic = lang === "ar";
+  const isFrench = lang === "fr";
+  const video = site.vslLocal[lang]?.src || site.heroVideo;
 
-  const getVideoSrc = (value: unknown): string => {
-  if (typeof value === "string") {
-    return value;
-  }
+  useEffect(() => {
+    if (!open) return;
 
-  if (
-    value &&
-    typeof value === "object" &&
-    "src" in value &&
-    typeof value.src === "string"
-  ) {
-    return value.src;
-  }
+    const previousOverflow = document.body.style.overflow;
+    const trigger = triggerRef.current;
+    document.body.style.overflow = "hidden";
+    closeRef.current?.focus();
 
-  return "";
-};
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (event.key !== "Tab") return;
 
-const video = getVideoSrc(
-  site.heroVideo ||
-    site.vslLocal?.[
-      lang as keyof typeof site.vslLocal
-    ],
-);
+      const focusable = Array.from(
+        dialogRef.current?.querySelectorAll<HTMLElement>("button, video[controls]") ?? [],
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (!first || !last) return;
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", onKeyDown);
+      trigger?.focus();
+    };
+  }, [open]);
 
   return (
     <>
@@ -136,6 +155,8 @@ const video = getVideoSrc(
               <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#72CFFF] sm:text-[10px]">
                 {isArabic
                   ? "شاهد مسباك في الواقع"
+                : isFrench
+                  ? "DÉCOUVREZ MUSBAK EN ACTION"
                   : "SEE MUSBAK IN ACTION"}
               </p>
 
@@ -145,13 +166,17 @@ const video = getVideoSrc(
             <h2 className="text-2xl font-bold tracking-[-0.04em] text-white sm:text-3xl lg:text-[38px]">
               {isArabic
                 ? "تجربة تعليمية تتجاوز الشاشة."
-                : "Learning that feels personal."}
+                : isFrench
+                  ? "Un apprentissage à visage humain."
+                  : "Learning that feels personal."}
             </h2>
 
             <p className="mx-auto mt-3 max-w-xl text-xs leading-6 text-white/55 sm:text-sm">
               {isArabic
                 ? "ألقِ نظرة أقرب على طريقة التعلم في مسباك."
-                : "Take a closer look at how learning with Musbak comes to life."}
+                : isFrench
+                  ? "Découvrez de plus près l’expérience d’apprentissage chez Musbak."
+                  : "Take a closer look at how learning with Musbak comes to life."}
             </p>
           </motion.div>
 
@@ -210,7 +235,9 @@ const video = getVideoSrc(
                       <p className="mt-2 text-xs text-white/40">
                         {isArabic
                           ? "الفيديو التعريفي سيظهر هنا"
-                          : "Your introduction video will appear here"}
+                          : isFrench
+                            ? "La vidéo de présentation apparaîtra ici"
+                            : "Your introduction video will appear here"}
                       </p>
                     </div>
                   </div>
@@ -230,20 +257,31 @@ const video = getVideoSrc(
               ================================================= */}
 
               <div className="absolute inset-0 flex items-center justify-center">
-                <button
-                  type="button"
-                  onClick={() => setOpen(true)}
-                  aria-label={
-                    isArabic
-                      ? "تشغيل الفيديو"
-                      : "Play Musbak introduction video"
-                  }
-                  className="group relative flex h-[72px] w-[72px] items-center justify-center rounded-full bg-white text-[#001A3F] shadow-[0_15px_45px_rgba(0,0,0,0.3)] transition-all duration-300 hover:scale-105 hover:bg-[#EAF8FF] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#35B8FF] sm:h-20 sm:w-20"
-                >
-                  <span className="absolute inset-[-8px] rounded-full border border-white/25 transition-all duration-500 group-hover:inset-[-12px] group-hover:border-[#35B8FF]/60" />
-
-                  <PlayIcon />
-                </button>
+                {video ? (
+                  <button
+                    type="button"
+                    ref={triggerRef}
+                    onClick={() => setOpen(true)}
+                    aria-label={
+                      isArabic
+                        ? "تشغيل الفيديو"
+                        : isFrench
+                          ? "Lire la vidéo de présentation de Musbak"
+                          : "Play Musbak introduction video"
+                    }
+                    className="group relative flex h-[72px] w-[72px] items-center justify-center rounded-full bg-white text-[#001A3F] shadow-[0_15px_45px_rgba(0,0,0,0.3)] transition-all duration-300 hover:scale-105 hover:bg-[#EAF8FF] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#35B8FF] sm:h-20 sm:w-20"
+                  >
+                    <span className="absolute inset-[-8px] rounded-full border border-white/25 transition-all duration-500 group-hover:inset-[-12px] group-hover:border-[#35B8FF]/60" />
+                    <PlayIcon />
+                  </button>
+                ) : (
+                  <div
+                    className="flex h-[72px] w-[72px] items-center justify-center rounded-full bg-white/90 text-[#001A3F] shadow-[0_15px_45px_rgba(0,0,0,0.3)] sm:h-20 sm:w-20"
+                    aria-hidden="true"
+                  >
+                    <PlayIcon />
+                  </div>
+                )}
               </div>
 
               {/* =================================================
@@ -257,7 +295,9 @@ const video = getVideoSrc(
                   <span className="text-[8px] font-bold uppercase tracking-[0.18em] text-white/75">
                     {isArabic
                       ? "شاهد الفيديو"
-                      : "WATCH VIDEO"}
+                      : isFrench
+                        ? "VOIR LA VIDÉO"
+                        : "WATCH VIDEO"}
                   </span>
                 </div>
               </div>
@@ -273,14 +313,16 @@ const video = getVideoSrc(
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.25, duration: 0.5 }}
-            className="mt-7 flex items-center justify-center gap-3 text-[8px] font-bold uppercase tracking-[0.25em] text-white/25"
+            className="mt-7 flex items-center justify-center gap-3 text-[9px] font-bold uppercase tracking-[0.2em] text-white/55"
           >
             <span className="h-px w-8 bg-white/15" />
 
             <span>
               {isArabic
                 ? "تعلّم • تواصل • نمُ"
-                : "LEARN • CONNECT • GROW"}
+                : isFrench
+                  ? "APPRENDRE • ÉCHANGER • PROGRESSER"
+                  : "LEARN • CONNECT • GROW"}
             </span>
 
             <span className="h-px w-8 bg-white/15" />
@@ -295,6 +337,16 @@ const video = getVideoSrc(
       <AnimatePresence>
         {open && video && (
           <motion.div
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label={
+              isArabic
+                ? "فيديو مسباك التعريفي"
+                : isFrench
+                  ? "Vidéo de présentation de Musbak"
+                  : "Musbak Academy introduction video"
+            }
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -333,11 +385,14 @@ const video = getVideoSrc(
 
               <button
                 type="button"
+                ref={closeRef}
                 onClick={() => setOpen(false)}
                 aria-label={
                   isArabic
                     ? "إغلاق الفيديو"
-                    : "Close video"
+                    : isFrench
+                      ? "Fermer la vidéo"
+                      : "Close video"
                 }
                 className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-md transition-colors hover:bg-black/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#35B8FF] rtl:right-auto rtl:left-4"
               >

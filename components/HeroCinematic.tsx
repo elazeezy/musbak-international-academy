@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { useLang } from "@/lib/i18n";
@@ -12,6 +12,9 @@ export function HeroCinematic() {
   const h = t.landing.hero;
 
   const [vslOpen, setVslOpen] = useState(false);
+  const vslTriggerRef = useRef<HTMLButtonElement>(null);
+  const vslCloseRef = useRef<HTMLButtonElement>(null);
+  const vslDialogRef = useRef<HTMLDivElement>(null);
 
   const isArabic = lang === "ar";
 
@@ -21,27 +24,45 @@ export function HeroCinematic() {
    * ================================================================
    */
 
-  const getVideoSrc = (value: unknown): string => {
-    if (typeof value === "string") {
-      return value;
-    }
+  const vsl = site.vslLocal[lang]?.src || site.heroVideo;
 
-    if (
-      value &&
-      typeof value === "object" &&
-      "src" in value &&
-      typeof value.src === "string"
-    ) {
-      return value.src;
-    }
+  useEffect(() => {
+    if (!vslOpen) return;
 
-    return "";
-  };
+    const previousOverflow = document.body.style.overflow;
+    const trigger = vslTriggerRef.current;
+    document.body.style.overflow = "hidden";
+    vslCloseRef.current?.focus();
 
-  const vsl = getVideoSrc(
-    site.heroVideo ||
-      site.vslLocal?.[lang as keyof typeof site.vslLocal]
-  );
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setVslOpen(false);
+        return;
+      }
+      if (event.key !== "Tab") return;
+
+      const focusable = Array.from(
+        vslDialogRef.current?.querySelectorAll<HTMLElement>("button, video[controls]") ?? [],
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (!first || !last) return;
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", onKeyDown);
+      trigger?.focus();
+    };
+  }, [vslOpen]);
 
   /*
    * ================================================================
@@ -88,7 +109,7 @@ export function HeroCinematic() {
         className="
           relative
           isolate
-          min-h-[1040px]
+          min-h-[980px]
           overflow-hidden
           bg-[#001A3F]
           lg:min-h-screen
@@ -329,7 +350,13 @@ export function HeroCinematic() {
           >
             <Image
               src="/images/hero-child-cutout.png"
-              alt="A young student reading the Qur'an"
+              alt={
+                lang === "ar"
+                  ? "طفل يقرأ القرآن الكريم"
+                  : lang === "fr"
+                    ? "Un enfant lit le Coran"
+                    : "A young student reading the Qur’an"
+              }
               fill
               priority
               sizes="60vw"
@@ -384,7 +411,7 @@ export function HeroCinematic() {
             z-30
             mx-auto
             flex
-            min-h-[1040px]
+            min-h-[980px]
             w-full
             max-w-[1480px]
             items-start
@@ -602,8 +629,8 @@ export function HeroCinematic() {
             left-1/2
             z-20
             block
-            h-[400px]
-            w-[470px]
+            h-[360px]
+            w-[430px]
             -translate-x-1/2
             lg:hidden
           "
@@ -632,7 +659,13 @@ export function HeroCinematic() {
           >
             <Image
               src="/images/hero-child-cutout.png"
-              alt="A young student reading the Qur'an"
+              alt={
+                lang === "ar"
+                  ? "طفل يقرأ القرآن الكريم"
+                  : lang === "fr"
+                    ? "Un enfant lit le Coran"
+                    : "A young student reading the Qur’an"
+              }
               fill
               priority
               sizes="90vw"
@@ -663,6 +696,7 @@ export function HeroCinematic() {
 
         <motion.button
           type="button"
+          ref={vslTriggerRef}
           onClick={() => {
             if (vsl) {
               setVslOpen(true);
@@ -684,7 +718,7 @@ export function HeroCinematic() {
           }}
           className="
             absolute
-            bottom-[385px]
+            bottom-[345px]
             left-1/2
             z-50
             flex
@@ -735,7 +769,17 @@ export function HeroCinematic() {
             </svg>
           </span>
 
-          {vsl ? "Watch our story" : "See Musbak in action"}
+          {vsl
+            ? lang === "ar"
+              ? "شاهد قصتنا"
+              : lang === "fr"
+                ? "Découvrez notre histoire"
+                : "Watch our story"
+            : lang === "ar"
+              ? "اكتشف مسباك"
+              : lang === "fr"
+                ? "Découvrez Musbak"
+                : "See Musbak in action"}
         </motion.button>
 
         {/* ============================================================
@@ -745,6 +789,16 @@ export function HeroCinematic() {
         <AnimatePresence>
           {vslOpen && vsl && (
             <motion.div
+              ref={vslDialogRef}
+              role="dialog"
+              aria-modal="true"
+              aria-label={
+                lang === "ar"
+                  ? "فيديو مسباك التعريفي"
+                  : lang === "fr"
+                    ? "Vidéo de présentation de Musbak"
+                    : "Musbak Academy video"
+              }
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -759,9 +813,6 @@ export function HeroCinematic() {
                 p-5
                 backdrop-blur-xl
               "
-              role="dialog"
-              aria-modal="true"
-              aria-label="Musbak Academy video"
               onClick={() => setVslOpen(false)}
             >
               <motion.div
@@ -793,8 +844,15 @@ export function HeroCinematic() {
               >
                 <button
                   type="button"
+                  ref={vslCloseRef}
                   onClick={() => setVslOpen(false)}
-                  aria-label="Close video"
+                  aria-label={
+                    lang === "ar"
+                      ? "إغلاق الفيديو"
+                      : lang === "fr"
+                        ? "Fermer la vidéo"
+                        : "Close video"
+                  }
                   className="
                     absolute
                     right-4

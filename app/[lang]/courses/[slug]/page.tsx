@@ -72,32 +72,32 @@ export default async function CoursePage({
         <nav aria-label="Breadcrumb">
           <ol className="flex flex-wrap items-center gap-2 text-sm text-muted">
             <li>
-              <Link href={`/${lang}`} className="transition-colors hover:text-gold">
+              <Link href={`/${lang}`} className="transition-colors hover:text-accent-deep">
                 {t.seo.home}
               </Link>
             </li>
             <li aria-hidden className="text-line">/</li>
             <li>
-              <Link href={`/${lang}/courses`} className="transition-colors hover:text-gold">
+              <Link href={`/${lang}/courses`} className="transition-colors hover:text-accent-deep">
                 {t.seo.courses}
               </Link>
             </li>
             <li aria-hidden className="text-line">/</li>
-            <li aria-current="page" className="font-semibold text-cream">
+            <li aria-current="page" className="font-semibold text-white">
               {course.name}
             </li>
           </ol>
         </nav>
 
-        <p className="mt-10 text-xs font-bold uppercase tracking-[0.2em] text-golddeep">
+        <p className="mt-10 text-xs font-bold uppercase tracking-[0.2em] text-[#72CFFF]">
           {course.group}
         </p>
-        <h1 className="mt-3 text-4xl font-bold leading-tight text-cream sm:text-5xl">
+        <h1 className="mt-3 text-4xl font-bold leading-tight text-white sm:text-5xl">
           {course.name}
         </h1>
-        <p className="mt-6 text-lg leading-relaxed text-body">{course.description}</p>
+        <p className="mt-6 text-lg leading-relaxed text-white/75">{course.description}</p>
 
-        <p className="mt-6 inline-flex items-center gap-2 rounded-lg bg-ink2 px-3 py-2 text-sm font-semibold text-golddeep">
+        <p className="mt-6 inline-flex items-center gap-2 rounded-lg bg-ink2 px-3 py-2 text-sm font-semibold text-[#8DDCFF]">
           {t.seo.trialNote}
         </p>
 
@@ -106,14 +106,14 @@ export default async function CoursePage({
             href={waLink(t.wa.learn(course.name))}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-bold text-cream transition-all hover:bg-gold2 hover:shadow-lg hover:shadow-gold/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-golddeep"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-accent-deep px-6 py-3 text-sm font-bold text-white transition-all hover:bg-[#17639A] hover:shadow-lg hover:shadow-accent/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-deep"
           >
             <WhatsAppIcon className="h-4 w-4" />
             {t.nav.cta}
           </a>
           <Link
             href={`/${lang}/courses`}
-            className="inline-flex min-h-11 items-center justify-center rounded-full border border-line bg-white px-6 py-3 text-sm font-semibold text-cream transition-colors hover:border-gold hover:text-golddeep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-golddeep"
+            className="inline-flex min-h-11 items-center justify-center rounded-full border border-line bg-white px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-accent hover:text-accent-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-deep"
           >
             {t.seo.backToCourses}
           </Link>
@@ -123,7 +123,7 @@ export default async function CoursePage({
           {t.pricing.note}{" "}
           <Link
             href={`/${lang}#pricing`}
-            className="font-semibold text-golddeep underline-offset-2 hover:underline"
+            className="font-semibold text-[#72CFFF] underline-offset-2 hover:underline"
           >
             {t.nav.pricing}
           </Link>

@@ -12,7 +12,7 @@ export function WhatsAppFloat() {
   /*
    * Show the desktop tooltip after a short delay.
    * The entire component is hidden on mobile, so this only
-   * matters on md+ screens.
+   * matters on desktop screens.
    */
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -32,8 +32,8 @@ export function WhatsAppFloat() {
         hidden
         items-center
         gap-3
-        md:flex
-        md:end-6
+        lg:flex
+        lg:end-6
       "
     >
       {/* ================================================

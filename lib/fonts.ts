@@ -1,25 +1,34 @@
-import { Sora, Cairo, Amiri, Fraunces } from "next/font/google";
+import localFont from "next/font/local";
 
-export const sora = Sora({
+export const sora = localFont({
+  src: "../public/fonts/Sora-Variable.ttf",
   variable: "--font-sora",
-  subsets: ["latin"],
+  display: "swap",
+  weight: "100 900",
 });
 
-export const cairo = Cairo({
+export const cairo = localFont({
+  src: "../public/fonts/Cairo-Variable.ttf",
   variable: "--font-cairo",
-  subsets: ["arabic", "latin"],
+  display: "swap",
+  weight: "200 1000",
 });
 
-export const amiri = Amiri({
+export const amiri = localFont({
+  src: [
+    { path: "../public/fonts/Amiri-Regular.ttf", weight: "400", style: "normal" },
+    { path: "../public/fonts/Amiri-Bold.ttf", weight: "700", style: "normal" },
+  ],
   variable: "--font-amiri",
-  subsets: ["arabic"],
-  weight: ["400", "700"],
+  display: "swap",
 });
 
 /* Editorial display serif for major statements (Latin faces). */
-export const fraunces = Fraunces({
+export const fraunces = localFont({
+  src: "../public/fonts/Fraunces-Variable.ttf",
   variable: "--font-fraunces",
-  subsets: ["latin"],
+  display: "swap",
+  weight: "100 900",
 });
 
 export const fontVariables = `${sora.variable} ${cairo.variable} ${amiri.variable} ${fraunces.variable}`;

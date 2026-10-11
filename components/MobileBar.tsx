@@ -42,7 +42,7 @@ export function MobileBar() {
         z-40
         px-3
         pb-[calc(10px+env(safe-area-inset-bottom))]
-        md:hidden
+        lg:hidden
       "
     >
       <div
@@ -79,14 +79,14 @@ export function MobileBar() {
             justify-center
             gap-3
             rounded-[16px]
-            bg-[#35B8FF]
+            bg-[#087CC1]
             px-4
-            text-[#001A3F]
-            shadow-[0_8px_25px_rgba(53,184,255,0.18)]
+            text-white
+            shadow-[0_8px_25px_rgba(8,124,193,0.28)]
             transition-all
             duration-200
             active:scale-[0.98]
-            hover:bg-white
+            hover:bg-[#17639A]
             focus-visible:outline-none
             focus-visible:ring-2
             focus-visible:ring-[#35B8FF]
@@ -128,11 +128,12 @@ export function MobileBar() {
           {/* Arrow */}
           <span
             className="
-              ml-1
+              ms-1
               text-[17px]
               transition-transform
               duration-200
               group-hover:translate-x-0.5
+              rtl:rotate-180
             "
             aria-hidden="true"
           >

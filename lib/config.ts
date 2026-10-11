@@ -1,3 +1,14 @@
+import type { Lang } from "./dictionaries";
+
+type LocalVideo = { src: string; duration: string };
+
+const vslLocal: Partial<Record<Lang, LocalVideo>> = {
+  ar: {
+    src: "/videos/musbak-introductory-video-arabic.mp4",
+    duration: "0:51",
+  },
+};
+
 export const site = {
   name: "Musbak International Academy",
   nameAr: "أكاديمية مسباك العالمية",
@@ -18,12 +29,7 @@ export const site = {
   vslUrl: "",
   // Per-locale intro videos (MP4 files in /public/videos) — take precedence
   // over vslUrl for that locale. Add en/fr entries when their videos exist.
-  vslLocal: {
-    ar: {
-      src: "/videos/musbak-introductory-video-arabic.mp4",
-      duration: "0:51",
-    },
-  } as Record<string, { src: string; duration: string }>,
+  vslLocal,
   socials: {
     instagram: "#",
     tiktok: "#",

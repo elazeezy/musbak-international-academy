@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useLang } from "@/lib/i18n";
@@ -217,10 +218,12 @@ function ImageTile({
       whileHover={{ y: -5 }}
       className={`group relative overflow-hidden rounded-[24px] border border-white/70 bg-white shadow-[0_14px_45px_rgba(0,50,90,0.08)] ${className}`}
     >
-      <img
+      <Image
         src={src}
         alt={label}
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+        fill
+        sizes="(min-width: 1024px) 40vw, 100vw"
+        className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
       />
 
       <div className="absolute inset-0 bg-gradient-to-t from-[#001A3F]/55 via-transparent to-transparent" />
@@ -275,30 +278,18 @@ export function ProofMosaic() {
    * MEDIA SETUP
    * ============================================================
    *
-   * VIDEO:
-   * Put your real videos inside:
-   *
-   * public/videos/
-   *
-   * Example:
-   * public/videos/learning-1.mp4
-   * public/videos/learning-2.mp4
-   *
-   * Then change type to "video" and add the src.
-   *
-   * IMAGE:
-   * When you receive your real photos, put them inside:
-   *
-   * public/images/
-   *
-   * and change the relevant tile to type: "image".
+   * Use the available learning photos until consented class videos are ready.
    */
 
   const media: MediaTile[] = [
     {
-      type: "video",
-      src: "/videos/learning-1.mp4",
-      label: isArabic ? "درس مباشر" : "Live learning",
+      type: "image",
+      src: "/images/proof-1.jpg",
+      label: isArabic
+        ? "درس القرآن"
+        : lang === "fr"
+          ? "Apprentissage du Coran"
+          : "Qur’an learning",
       className: "lg:col-span-2 lg:row-span-2",
       accent: "featured",
     },
@@ -310,9 +301,13 @@ export function ProofMosaic() {
     },
 
     {
-      type: "video",
-      src: "/videos/learning-2.mp4",
-      label: isArabic ? "داخل الفصل" : "Inside the classroom",
+      type: "image",
+      src: "/images/proof-2.jpg",
+      label: isArabic
+        ? "التعلم معًا"
+        : lang === "fr"
+          ? "Apprendre ensemble"
+          : "Learning together",
       className: "",
     },
 
@@ -371,7 +366,11 @@ export function ProofMosaic() {
               <span className="h-2 w-2 rounded-full bg-[#35B8FF]" />
 
               <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#17639A] sm:text-xs">
-                {isArabic ? "داخل تجربة مسباك" : "INSIDE MUSBAK"}
+                {isArabic
+                  ? "داخل تجربة مسباك"
+                  : lang === "fr"
+                    ? "AU CŒUR DE MUSBAK"
+                    : "INSIDE MUSBAK"}
               </span>
             </div>
 
@@ -394,20 +393,24 @@ export function ProofMosaic() {
               {proof.sub}
             </p>
 
-            <button
-              type="button"
-              className="mt-5 inline-flex w-fit items-center gap-3 rounded-full bg-[#001A3F] px-5 py-3 text-xs font-bold text-white shadow-[0_10px_30px_rgba(0,26,63,0.16)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#07518B]"
+            <a
+              href="#vsl"
+              className="mt-5 inline-flex min-h-11 w-fit items-center gap-3 rounded-full bg-[#001A3F] px-5 py-3 text-xs font-bold text-white shadow-[0_10px_30px_rgba(0,26,63,0.16)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#07518B] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#35B8FF]"
             >
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10">
                 <PlayIcon />
               </span>
 
               <span>
-                {isArabic ? "شاهد الفيديو" : "Watch Video"}
+                {isArabic
+                  ? "شاهد الفيديو"
+                  : lang === "fr"
+                    ? "Voir la vidéo"
+                    : "Watch Video"}
               </span>
 
               <ArrowIcon />
-            </button>
+            </a>
           </motion.div>
         </div>
 
@@ -467,7 +470,9 @@ export function ProofMosaic() {
           <span>
             {isArabic
               ? "تعلم حقيقي. تقدم حقيقي."
-              : "REAL LEARNING. REAL PROGRESS."}
+              : lang === "fr"
+                ? "APPRENDRE. PROGRESSER. ENSEMBLE."
+                : "REAL LEARNING. REAL PROGRESS."}
           </span>
 
           <span className="h-px w-10 bg-[#C8E0EE]" />

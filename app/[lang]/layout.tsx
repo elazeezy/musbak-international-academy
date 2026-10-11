@@ -37,7 +37,7 @@ export default async function LangLayout({
 
   return (
     <html lang={lang} dir={dir} className={`${fontVariables} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-ink text-cream">
+      <body className="min-h-full flex flex-col bg-ink text-white">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: jsonLdScriptTag(organizationJsonLd(lang)) }}

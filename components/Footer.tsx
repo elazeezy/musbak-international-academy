@@ -36,6 +36,8 @@ const SOCIALS = [
   },
 ];
 
+const configuredSocials = SOCIALS.filter(({ href }) => href !== "#");
+
 export function Footer() {
   const { lang, t } = useLang();
   const pathname = usePathname();
@@ -162,7 +164,7 @@ export function Footer() {
           MAIN FOOTER
       ========================================================== */}
 
-      <div className="relative mx-auto max-w-[1400px] px-5 py-16 sm:px-8 lg:px-12 lg:py-20">
+      <div className="relative mx-auto max-w-[1400px] px-5 pt-16 pb-[calc(7rem+env(safe-area-inset-bottom))] sm:px-8 sm:pb-16 lg:px-12 lg:py-20">
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-10">
           {/* ======================================================
               BRAND
@@ -175,11 +177,11 @@ export function Footer() {
               className="inline-flex items-center"
             >
               <Image
-                src="/musbak-logo.png"
+                src="/musbak-logo.jpeg"
                 alt="Musbak International Academy"
                 width={200}
                 height={118}
-                className="h-14 w-auto object-contain brightness-0 invert"
+                className="h-14 w-auto object-contain"
               />
             </a>
 
@@ -191,14 +193,14 @@ export function Footer() {
                 FOLLOW
             ==================================================== */}
 
-            <div className="mt-8">
-              <p className="text-[9px] font-bold uppercase tracking-[0.28em] text-[#72CFFF]">
-                {t.footer.follow}
-              </p>
+            {configuredSocials.length > 0 && (
+              <div className="mt-8">
+                <p className="text-[9px] font-bold uppercase tracking-[0.28em] text-[#72CFFF]">
+                  {t.footer.follow}
+                </p>
 
-              <div className="mt-4 flex items-center gap-2.5">
-                {SOCIALS.map(
-                  ({ label, href, Icon }) => (
+                <div className="mt-4 flex items-center gap-2.5">
+                  {configuredSocials.map(({ label, href, Icon }) => (
                     <a
                       key={label}
                       href={href}
@@ -209,10 +211,10 @@ export function Footer() {
                     >
                       <Icon className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
                     </a>
-                  ),
-                )}
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* ======================================================

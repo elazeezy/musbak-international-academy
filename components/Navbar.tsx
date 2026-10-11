@@ -188,6 +188,7 @@ export function Navbar() {
       );
 
     const previousOverflow = document.body.style.overflow;
+    const toggle = toggleRef.current;
 
     document.body.style.overflow = "hidden";
 
@@ -248,7 +249,7 @@ export function Navbar() {
         onViewportChange
       );
 
-      toggleRef.current?.focus();
+      toggle?.focus();
     };
   }, [open]);
 
@@ -277,10 +278,6 @@ export function Navbar() {
     {
       href: anchor("#why"),
       label: t.nav.why,
-    },
-    {
-      href: anchor("#pricing"),
-      label: t.nav.pricing,
     },
     {
       href: anchor("#faq"),
@@ -420,32 +417,11 @@ export function Navbar() {
           {/* Language */}
           <LangSwitcher />
 
-          {/* Login */}
           <Link
             href={`/${lang}/login`}
-            className="
-              hidden
-              min-h-10
-              items-center
-              justify-center
-              rounded-full
-              px-4
-              text-[12px]
-              font-semibold
-              text-white/75
-              transition-all
-              duration-300
-              hover:bg-white/[0.06]
-              hover:text-white
-              focus-visible:outline-none
-              focus-visible:ring-2
-              focus-visible:ring-[#35B8FF]
-              focus-visible:ring-offset-2
-              focus-visible:ring-offset-[#001A3F]
-              sm:flex
-            "
+            className="hidden min-h-10 items-center rounded-full border border-white/15 px-4 text-[11px] font-semibold text-white/80 transition hover:border-white/35 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#35B8FF] sm:flex"
           >
-            {isArabic ? "تسجيل الدخول" : lang === "fr" ? "Connexion" : "Log in"}
+            {t.footer.portals}
           </Link>
 
           {/* Primary CTA */}
@@ -683,39 +659,14 @@ export function Navbar() {
             <LangSwitcher />
           </div>
 
-          {/* Login */}
+          {/* CTA */}
           <Link
             href={`/${lang}/login`}
             onClick={() => setOpen(false)}
-            className="
-              flex
-              min-h-12
-              items-center
-              justify-center
-              rounded-full
-              border
-              border-white/15
-              bg-white/[0.035]
-              px-5
-              text-sm
-              font-semibold
-              text-white
-              transition-all
-              hover:border-white/30
-              hover:bg-white/[0.07]
-              focus-visible:outline-none
-              focus-visible:ring-2
-              focus-visible:ring-[#35B8FF]
-            "
+            className="flex min-h-12 items-center justify-center rounded-full border border-white/15 px-5 text-sm font-semibold text-white focus-visible:outline-2 focus-visible:outline-[#35B8FF]"
           >
-            {isArabic
-              ? "تسجيل الدخول"
-              : lang === "fr"
-                ? "Connexion"
-                : "Log in"}
+            {t.footer.portals}
           </Link>
-
-          {/* CTA */}
           <a
             href={waLink(t.wa.trial)}
             target="_blank"

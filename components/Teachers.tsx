@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence, PanInfo } from "framer-motion";
 import { useLang } from "@/lib/i18n";
 
@@ -72,6 +73,8 @@ function UserIcon() {
     </svg>
   );
 }
+
+const TEACHER_PHOTOS: (string | null)[] = [null, null, null, null, null, null];
 
 function TeacherPlaceholder({
   index,
@@ -146,30 +149,14 @@ export function Teachers() {
    *
    * Keep these as null until you receive the real staff photos.
    *
-   * Later, simply change:
-   *
-   * null
-   *
-   * to:
-   *
-   * "/images/teachers/ahmad.jpg"
-   *
-   * No other part of this component needs to change.
+   * Replace null entries with verified, consented public image paths when
+   * staff portraits are approved for publication.
    */
-
-  const teacherPhotos: (string | null)[] = [
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-  ];
 
   const teachers = useMemo(() => {
     return items.map((item, index) => ({
       ...item,
-      photo: teacherPhotos[index] ?? null,
+      photo: TEACHER_PHOTOS[index] ?? null,
     }));
   }, [items]);
 
@@ -301,10 +288,12 @@ export function Teachers() {
               }`}
             >
               {previousTeacher.photo ? (
-                <img
+                <Image
                   src={previousTeacher.photo}
                   alt=""
-                  className="h-full w-full object-cover"
+                  fill
+                  sizes="180px"
+                  className="object-cover"
                 />
               ) : (
                 <TeacherPlaceholder
@@ -324,10 +313,12 @@ export function Teachers() {
               className="relative h-[300px] w-[180px] overflow-hidden rounded-[28px] border border-white/80 bg-white/60 opacity-70 shadow-[0_15px_50px_rgba(0,50,90,0.06)]"
             >
               {nextTeacher.photo ? (
-                <img
+                <Image
                   src={nextTeacher.photo}
                   alt=""
-                  className="h-full w-full object-cover"
+                  fill
+                  sizes="180px"
+                  className="object-cover"
                 />
               ) : (
                 <TeacherPlaceholder
@@ -387,10 +378,12 @@ export function Teachers() {
 
                 <div className="relative min-h-[340px] overflow-hidden bg-[#082D52] sm:min-h-[400px] lg:min-h-[455px]">
                   {teacher.photo ? (
-                    <img
+                    <Image
                       src={teacher.photo}
                       alt={teacher.name}
-                      className="absolute inset-0 h-full w-full object-cover"
+                      fill
+                      sizes="(min-width: 1024px) 40vw, 100vw"
+                      className="object-cover"
                     />
                   ) : (
                     <TeacherPlaceholder

@@ -15,17 +15,17 @@ export default function NotFound() {
 
   return (
     <main className="flex min-h-[70vh] flex-col items-center justify-center px-5 py-24 text-center">
-      <p className="text-xs font-bold uppercase tracking-[0.3em] text-golddeep">404</p>
-      <h1 className="mt-4 font-[family-name:var(--font-sora)] text-3xl font-bold text-cream sm:text-4xl">
+      <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#72CFFF]">404</p>
+      <h1 className="mt-4 font-[family-name:var(--font-sora)] text-3xl font-bold text-white sm:text-4xl">
         {t.notFoundTitle}
       </h1>
-      <p className="mt-4 max-w-md text-body">{t.notFoundBody}</p>
+      <p className="mt-4 max-w-md text-white/70">{t.notFoundBody}</p>
       <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
         {LANGS.map((lang) => (
           <Link
             key={lang}
             href={`/${lang}`}
-            className="min-h-11 rounded-full border border-line bg-white px-5 py-2.5 text-sm font-semibold text-cream transition-colors hover:border-gold hover:text-golddeep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-golddeep"
+            className="min-h-11 rounded-full border border-white/20 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:border-accent hover:text-[#8DDCFF] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-deep"
           >
             {getDictionary(lang).seo.home}
           </Link>
@@ -34,7 +34,7 @@ export default function NotFound() {
           href={waLink(en.wa.general)}
           target="_blank"
           rel="noopener noreferrer"
-          className="min-h-11 rounded-full bg-gold px-5 py-2.5 text-sm font-bold text-cream transition-colors hover:bg-gold2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-golddeep"
+          className="min-h-11 rounded-full bg-accent-deep px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#17639A] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           {t.notFoundCta}
         </a>

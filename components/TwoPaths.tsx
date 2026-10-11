@@ -248,7 +248,7 @@ export function TwoPaths() {
     {
       title: copy.academic,
       items: copy.academicItems,
-      image: "/images/academic-subjects.jpg",
+      image: "/images/hero-class.jpg",
       imagePosition: "center",
       icon: <BookIcon />,
     },
