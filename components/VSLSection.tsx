@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useLang } from "@/lib/i18n";
 import { site } from "@/lib/config";
+import { OPEN_VSL_EVENT } from "@/lib/vsl";
 
 function PlayIcon() {
   return (
@@ -48,7 +49,13 @@ export function VSLSection() {
 
   const isArabic = lang === "ar";
   const isFrench = lang === "fr";
-  const video = site.vslLocal[lang]?.src || site.heroVideo;
+  const video = site.vslLocal[lang]?.src || site.vslLocal.ar?.src || site.heroVideo;
+
+  useEffect(() => {
+    const openVideo = () => setOpen(true);
+    window.addEventListener(OPEN_VSL_EVENT, openVideo);
+    return () => window.removeEventListener(OPEN_VSL_EVENT, openVideo);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -93,7 +100,7 @@ export function VSLSection() {
      <section
   id="vsl"
   dir={isArabic ? "rtl" : "ltr"}
-  className="relative overflow-hidden rounded-t-[38px] bg-[#001A3F] sm:rounded-t-[48px] lg:rounded-t-[58px]"
+  className="relative scroll-mt-20 overflow-hidden rounded-t-[38px] bg-[#001A3F] sm:rounded-t-[48px] lg:rounded-t-[58px]"
 >
         {/* =====================================================
             ATMOSPHERE
@@ -206,7 +213,7 @@ export function VSLSection() {
             }}
             className="mx-auto mt-9 max-w-5xl"
           >
-            <div className="relative aspect-[16/6] overflow-hidden rounded-[24px] border border-white/10 bg-[#061D38] shadow-[0_30px_80px_rgba(0,0,0,0.28)] sm:aspect-[16/6] sm:rounded-[28px]">
+            <div className="relative aspect-video overflow-hidden rounded-[24px] border border-white/10 bg-[#061D38] shadow-[0_30px_80px_rgba(0,0,0,0.28)] sm:aspect-[16/6] sm:rounded-[28px]">
               {/* =================================================
                   VIDEO
               ================================================= */}
@@ -214,9 +221,10 @@ export function VSLSection() {
               {video ? (
                 <video
                   src={video}
+                  poster="/images/hero-poster.jpg"
                   muted
                   playsInline
-                  preload="metadata"
+                  preload="none"
                   className="absolute inset-0 h-full w-full object-cover"
                 />
               ) : (
@@ -377,6 +385,7 @@ export function VSLSection() {
             >
               <video
                 src={video}
+                poster="/images/hero-poster.jpg"
                 controls
                 autoPlay
                 playsInline

@@ -1,68 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 import { useLang } from "@/lib/i18n";
-import { site, waLink } from "@/lib/config";
+import { waLink } from "@/lib/config";
+import { OPEN_VSL_EVENT } from "@/lib/vsl";
 
 export function HeroCinematic() {
   const { lang, t } = useLang();
   const h = t.landing.hero;
 
-  const [vslOpen, setVslOpen] = useState(false);
-  const vslTriggerRef = useRef<HTMLButtonElement>(null);
-  const vslCloseRef = useRef<HTMLButtonElement>(null);
-  const vslDialogRef = useRef<HTMLDivElement>(null);
-
   const isArabic = lang === "ar";
-
-  /*
-   * ================================================================
-   * VIDEO SOURCE
-   * ================================================================
-   */
-
-  const vsl = site.vslLocal[lang]?.src || site.heroVideo;
-
-  useEffect(() => {
-    if (!vslOpen) return;
-
-    const previousOverflow = document.body.style.overflow;
-    const trigger = vslTriggerRef.current;
-    document.body.style.overflow = "hidden";
-    vslCloseRef.current?.focus();
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setVslOpen(false);
-        return;
-      }
-      if (event.key !== "Tab") return;
-
-      const focusable = Array.from(
-        vslDialogRef.current?.querySelectorAll<HTMLElement>("button, video[controls]") ?? [],
-      );
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (!first || !last) return;
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      document.removeEventListener("keydown", onKeyDown);
-      trigger?.focus();
-    };
-  }, [vslOpen]);
+  const reduceMotion = useReducedMotion();
 
   /*
    * ================================================================
@@ -71,17 +21,14 @@ export function HeroCinematic() {
    */
 
   const entrance = (delay: number) => ({
-    initial: {
-      opacity: 0,
-      y: 18,
-    },
+    initial: reduceMotion ? false : { opacity: 0, y: 18 },
     animate: {
       opacity: 1,
       y: 0,
     },
     transition: {
-      duration: 0.8,
-      delay,
+      duration: reduceMotion ? 0 : 0.55,
+      delay: reduceMotion ? 0 : delay,
       ease: [0.22, 1, 0.36, 1] as const,
     },
   });
@@ -96,9 +43,39 @@ export function HeroCinematic() {
     document
       .getElementById("paths")
       ?.scrollIntoView({
-        behavior: "smooth",
+        behavior: reduceMotion ? "instant" : "smooth",
         block: "start",
       });
+  };
+
+  const playVsl = () => {
+    const vsl = document.getElementById("vsl");
+    if (!vsl) {
+      window.dispatchEvent(new Event(OPEN_VSL_EVENT));
+      return;
+    }
+
+    vsl.scrollIntoView({
+      behavior: reduceMotion ? "instant" : "smooth",
+      block: "start",
+    });
+
+    const openVideo = () => window.dispatchEvent(new Event(OPEN_VSL_EVENT));
+    if (reduceMotion) {
+      openVideo();
+      return;
+    }
+
+    let opened = false;
+    const finishScroll = () => {
+      if (opened) return;
+      opened = true;
+      window.clearTimeout(fallbackTimer);
+      document.removeEventListener("scrollend", finishScroll);
+      openVideo();
+    };
+    const fallbackTimer = window.setTimeout(finishScroll, 1100);
+    document.addEventListener("scrollend", finishScroll, { once: true });
   };
 
   return (
@@ -109,10 +86,12 @@ export function HeroCinematic() {
         className="
           relative
           isolate
-          min-h-[980px]
+          min-h-0
           overflow-hidden
-          bg-[#001A3F]
+          pb-8
           lg:min-h-screen
+          lg:pb-0
+          bg-[#001A3F]
         "
       >
         {/* ============================================================
@@ -133,15 +112,16 @@ export function HeroCinematic() {
             src="/images/hero-mosque.jpg"
             alt=""
             fill
-            priority
+            loading="eager"
+            fetchPriority="low"
+            quality={70}
             sizes="100vw"
             className="
               object-cover
               object-center
-              opacity-[0.42]
-              grayscale
+              opacity-[0.9] lg:opacity-[0.68]
               contrast-[1.08]
-              saturate-[0.7]
+              saturate-[0.82] lg:grayscale lg:saturate-[0.7]
             "
           />
 
@@ -150,7 +130,7 @@ export function HeroCinematic() {
             className="
               absolute
               inset-0
-              bg-[#004B78]/55
+              bg-[#004B78]/38
               mix-blend-color
             "
           />
@@ -160,7 +140,7 @@ export function HeroCinematic() {
             className="
               absolute
               inset-0
-              bg-[#001A3F]/45
+              bg-[#001A3F]/32
             "
           />
 
@@ -200,10 +180,10 @@ export function HeroCinematic() {
               absolute
               inset-x-0
               top-0
-              h-[620px]
+              h-[720px]
               bg-gradient-to-b
               from-[#001A3F]
-              via-[#001A3F]/96
+              via-[#001A3F]/88
               to-transparent
               lg:hidden
             "
@@ -297,105 +277,6 @@ export function HeroCinematic() {
         </div>
 
         {/* ============================================================
-            DESKTOP CHILD
-           
-            English + French:
-              RIGHT
-
-            Arabic:
-              LEFT
-
-            No glass cards around the child.
-            ============================================================ */}
-
-        <div
-          className="
-            pointer-events-none
-            absolute
-            inset-0
-            z-20
-            hidden
-            lg:block
-          "
-        >
-          <motion.div
-            initial={{
-              opacity: 0,
-              scale: 0.96,
-              y: 20,
-            }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-              y: 0,
-            }}
-            transition={{
-              duration: 1.1,
-              delay: 0.15,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className={`
-              absolute
-              bottom-[-35px]
-              h-[780px]
-              w-[760px]
-              ${
-                isArabic
-                  ? "left-[-2%] xl:left-[0%]"
-                  : "right-[-2%] xl:right-[0%]"
-              }
-              xl:h-[820px]
-              xl:w-[800px]
-            `}
-          >
-            <Image
-              src="/images/hero-child-cutout.png"
-              alt={
-                lang === "ar"
-                  ? "طفل يقرأ القرآن الكريم"
-                  : lang === "fr"
-                    ? "Un enfant lit le Coran"
-                    : "A young student reading the Qur’an"
-              }
-              fill
-              priority
-              sizes="60vw"
-              className="
-                object-contain
-                object-bottom
-              "
-            />
-
-            {/* Subtle integration with the hero background */}
-            <div
-              className={`
-                absolute
-                inset-0
-                ${
-                  isArabic
-                    ? "bg-gradient-to-r from-transparent via-transparent to-[#001A3F]/10"
-                    : "bg-gradient-to-l from-transparent via-transparent to-[#001A3F]/10"
-                }
-              `}
-            />
-
-            {/* Fade the lower edge into the hero */}
-            <div
-              className="
-                absolute
-                inset-x-0
-                bottom-0
-                h-[190px]
-                bg-gradient-to-t
-                from-[#001A3F]
-                via-[#001A3F]/60
-                to-transparent
-              "
-            />
-          </motion.div>
-        </div>
-
-        {/* ============================================================
             DESKTOP TEXT
 
             English + French:
@@ -410,7 +291,7 @@ export function HeroCinematic() {
             relative
             z-30
             mx-auto
-            flex
+            hidden
             min-h-[980px]
             w-full
             max-w-[1480px]
@@ -418,6 +299,7 @@ export function HeroCinematic() {
             px-5
             pt-28
             sm:px-8
+            lg:flex
             lg:min-h-screen
             lg:items-center
             lg:px-10
@@ -612,283 +494,90 @@ export function HeroCinematic() {
                 {h.secondary}
               </a>
             </motion.div>
+            <button
+              type="button"
+              onClick={playVsl}
+              className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full px-2 text-sm font-medium text-white/75 transition-colors hover:text-[#35B8FF] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#35B8FF]"
+            >
+              <span className="flex h-7 w-7 items-center justify-center rounded-full border border-[#35B8FF]/70 text-[#35B8FF]" aria-hidden="true">▶</span>
+              {h.seeInAction}
+            </button>
           </div>
         </div>
 
-        {/* ============================================================
-            MOBILE CHILD
-
-            Mobile is intentionally a different composition.
-            ============================================================ */}
-
-        <div
-          className="
-            pointer-events-none
-            absolute
-            bottom-0
-            left-1/2
-            z-20
-            block
-            h-[360px]
-            w-[430px]
-            -translate-x-1/2
-            lg:hidden
-          "
-        >
+        {/* Mobile composition: copy and actions occupy their own flow above the learner. */}
+        <div className="relative z-30 mx-auto w-full max-w-[680px] px-5 pb-0 pt-[88px] sm:px-8 lg:hidden">
           <motion.div
-            initial={{
-              opacity: 0,
-              y: 30,
-              scale: 0.96,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-              scale: 1,
-            }}
-            transition={{
-              duration: 1,
-              delay: 0.3,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="
-              relative
-              h-full
-              w-full
-            "
+            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
           >
-            <Image
-              src="/images/hero-child-cutout.png"
-              alt={
-                lang === "ar"
-                  ? "طفل يقرأ القرآن الكريم"
-                  : lang === "fr"
-                    ? "Un enfant lit le Coran"
-                    : "A young student reading the Qur’an"
-              }
-              fill
-              priority
-              sizes="90vw"
-              className="
-                object-contain
-                object-bottom
-              "
-            />
-
-            <div
-              className="
-                absolute
-                inset-x-0
-                bottom-0
-                h-[150px]
-                bg-gradient-to-t
-                from-[#001A3F]
-                via-[#001A3F]/70
-                to-transparent
-              "
-            />
+            <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.18em] text-[#35B8FF] sm:text-[10px]">
+              {h.kicker}
+            </p>
+            <h1 className="max-w-[13ch] font-display text-[clamp(2.35rem,9vw,3.65rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-white [overflow-wrap:anywhere]">
+              <span className="block">{h.line1}</span>
+              <span className="block text-[#35B8FF]">{h.mobileLine2}</span>
+              <span className="block text-[#35B8FF]">{h.mobileLine3}</span>
+            </h1>
+            <p className="mt-4 max-w-[34rem] text-[13px] leading-[1.55] text-white/80 sm:text-base sm:leading-7">
+              {h.sub}
+            </p>
+            <div className={lang === "fr" ? "mt-5 flex max-w-[520px] flex-col gap-2" : "mt-5 flex max-w-[520px] flex-col gap-2 min-[390px]:flex-row min-[390px]:flex-wrap"}>
+              <button
+                type="button"
+                onClick={scrollToPaths}
+                className="group inline-flex min-h-12 min-w-0 flex-1 items-center justify-center gap-1 whitespace-nowrap rounded-full bg-[#35B8FF] px-2 text-[11px] font-bold leading-tight text-[#001A3F] transition-colors hover:bg-white active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#35B8FF] sm:gap-3 sm:px-5 sm:text-sm"
+              >
+                {h.primary}
+                <span aria-hidden="true" className={isArabic ? "rotate-180" : ""}>→</span>
+              </button>
+              <a
+                href={waLink(t.wa.trial)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-12 min-w-0 flex-1 items-center justify-center rounded-full border border-white/35 bg-[#001A3F]/60 px-3 text-[12px] font-semibold leading-tight text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#35B8FF] sm:px-5 sm:text-sm"
+              >
+                {h.secondary}
+              </a>
+              <button
+                type="button"
+                onClick={playVsl}
+                className="inline-flex min-h-10 items-center justify-center gap-2 self-center rounded-full px-4 text-[13px] font-medium text-white/90 transition-colors hover:text-[#35B8FF] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#35B8FF] min-[390px]:basis-full"
+              >
+                <span className="flex h-7 w-7 items-center justify-center rounded-full border border-[#35B8FF]/70 text-[#35B8FF]" aria-hidden="true">▶</span>
+                {h.seeInAction}
+              </button>
+            </div>
           </motion.div>
         </div>
 
-        {/* ============================================================
-            MOBILE VSL
-            ============================================================ */}
-
-        <motion.button
-          type="button"
-          ref={vslTriggerRef}
-          onClick={() => {
-            if (vsl) {
-              setVslOpen(true);
-            } else {
-              scrollToPaths();
-            }
-          }}
-          initial={{
-            opacity: 0,
-            y: 12,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{
-            duration: 0.7,
-            delay: 0.9,
-          }}
-          className="
-            absolute
-            bottom-[345px]
-            left-1/2
-            z-50
-            flex
-            -translate-x-1/2
-            items-center
-            gap-2
-            rounded-full
-            border
-            border-white/15
-            bg-[#001A3F]/65
-            px-4
-            py-2.5
-            text-[10px]
-            font-semibold
-            uppercase
-            tracking-[0.16em]
-            text-white/75
-            backdrop-blur-xl
-            transition
-            hover:border-[#35B8FF]/40
-            hover:text-white
-            lg:hidden
-          "
+        <motion.figure
+          initial={reduceMotion ? false : { opacity: 0, y: 14, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.6, delay: reduceMotion ? 0 : 0.12, ease: [0.22, 1, 0.36, 1] }}
+          className="relative z-20 mx-auto mt-0 h-[min(100vw,420px)] w-full max-w-[520px] lg:pointer-events-none lg:absolute lg:inset-0 lg:mx-auto lg:min-h-full lg:max-w-[1480px]"
         >
-          <span
-            className="
-              flex
-              h-6
-              w-6
-              items-center
-              justify-center
-              rounded-full
-              bg-[#35B8FF]
-              text-[#001A3F]
-            "
+          <div
+            className={`relative h-full w-full lg:absolute lg:bottom-[-35px] lg:h-[780px] lg:w-[760px] xl:h-[820px] xl:w-[800px] ${
+              isArabic ? "lg:left-[-2%] xl:left-0" : "lg:right-[-2%] xl:right-0"
+            }`}
           >
-            <svg
-              width="9"
-              height="9"
-              viewBox="0 0 9 9"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M2.7 1.4 7 4.5 2.7 7.6V1.4Z"
-                fill="currentColor"
-              />
-            </svg>
-          </span>
-
-          {vsl
-            ? lang === "ar"
-              ? "شاهد قصتنا"
-              : lang === "fr"
-                ? "Découvrez notre histoire"
-                : "Watch our story"
-            : lang === "ar"
-              ? "اكتشف مسباك"
-              : lang === "fr"
-                ? "Découvrez Musbak"
-                : "See Musbak in action"}
-        </motion.button>
-
-        {/* ============================================================
-            VSL MODAL
-            ============================================================ */}
-
-        <AnimatePresence>
-          {vslOpen && vsl && (
-            <motion.div
-              ref={vslDialogRef}
-              role="dialog"
-              aria-modal="true"
-              aria-label={
-                lang === "ar"
-                  ? "فيديو مسباك التعريفي"
-                  : lang === "fr"
-                    ? "Vidéo de présentation de Musbak"
-                    : "Musbak Academy video"
-              }
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="
-                fixed
-                inset-0
-                z-[100]
-                flex
-                items-center
-                justify-center
-                bg-[#001A3F]/90
-                p-5
-                backdrop-blur-xl
-              "
-              onClick={() => setVslOpen(false)}
-            >
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  scale: 0.96,
-                  y: 15,
-                }}
-                animate={{
-                  opacity: 1,
-                  scale: 1,
-                  y: 0,
-                }}
-                exit={{
-                  opacity: 0,
-                  scale: 0.96,
-                  y: 15,
-                }}
-                className="
-                  relative
-                  w-full
-                  max-w-5xl
-                  overflow-hidden
-                  rounded-3xl
-                  bg-black
-                  shadow-2xl
-                "
-                onClick={(event) => event.stopPropagation()}
-              >
-                <button
-                  type="button"
-                  ref={vslCloseRef}
-                  onClick={() => setVslOpen(false)}
-                  aria-label={
-                    lang === "ar"
-                      ? "إغلاق الفيديو"
-                      : lang === "fr"
-                        ? "Fermer la vidéo"
-                        : "Close video"
-                  }
-                  className="
-                    absolute
-                    right-4
-                    top-4
-                    z-10
-                    flex
-                    h-10
-                    w-10
-                    items-center
-                    justify-center
-                    rounded-full
-                    bg-black/50
-                    text-white
-                    backdrop-blur-md
-                    transition
-                    hover:bg-black/75
-                  "
-                >
-                  ×
-                </button>
-
-                <video
-                  src={vsl}
-                  controls
-                  autoPlay
-                  playsInline
-                  className="
-                    aspect-video
-                    w-full
-                    bg-black
-                  "
-                />
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            <Image
+              src="/images/hero-child-cutout.png"
+              alt={lang === "ar" ? "طفل يقرأ القرآن الكريم" : lang === "fr" ? "Un enfant lit le Coran" : "A young student reading the Qur’an"}
+              fill
+              loading="eager"
+              fetchPriority="high"
+              quality={78}
+              sizes="(min-width: 1280px) 800px, (min-width: 1024px) 760px, (max-width: 520px) 100vw, 520px"
+              className="object-contain object-bottom"
+            />
+            <div className={`absolute inset-0 hidden lg:block ${isArabic ? "bg-gradient-to-r from-transparent via-transparent to-[#001A3F]/10" : "bg-gradient-to-l from-transparent via-transparent to-[#001A3F]/10"}`} />
+            <div aria-hidden="true" className="absolute inset-x-0 bottom-0 hidden h-[190px] bg-gradient-to-t from-[#001A3F] via-[#001A3F]/60 to-transparent lg:block" />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#001A3F] to-transparent lg:hidden" />
+          </div>
+        </motion.figure>
       </section>
     </>
   );

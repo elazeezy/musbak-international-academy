@@ -390,7 +390,7 @@ export function TwoPaths() {
                       alt=""
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
-                      className={`object-cover opacity-[0.25] grayscale-[15%] transition-all duration-700 group-hover:scale-105 group-hover:opacity-[0.34] ${
+                      className={`object-cover opacity-[0.62] transition-all duration-700 group-hover:scale-105 group-hover:opacity-[0.75] ${
                         card.imagePosition === "right bottom"
                           ? "object-right-bottom"
                           : card.imagePosition === "center right"
@@ -401,10 +401,10 @@ export function TwoPaths() {
                   </div>
 
                   {/* White/blue readability wash */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white via-white/90 to-[#DCEFFF]/45" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/90 via-white/55 to-[#DCEFFF]/10" />
 
                   {/* Bottom image reveal */}
-                  <div className="absolute inset-x-0 bottom-0 h-[48%] bg-gradient-to-t from-[#D5ECFA]/80 via-[#EAF6FD]/35 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 h-[42%] bg-gradient-to-t from-[#D5ECFA]/70 via-[#EAF6FD]/25 to-transparent" />
 
                   {/* Content */}
                   <div

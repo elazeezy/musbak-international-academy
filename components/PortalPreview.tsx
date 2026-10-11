@@ -376,7 +376,7 @@ function StudentDashboard({
           <p className="mt-1 text-[9px] text-[#7991A1]">
             {isArabic
               ? "استمر، أنت تحقق تقدمًا رائعًا."
-              : "Keep going — you're making great progress."}
+              : "Keep going. You're making great progress."}
           </p>
 
           <div className="mt-4 space-y-2.5">
@@ -565,8 +565,8 @@ function ParentDashboard({
 
               <h3 className="mt-1 text-sm font-bold text-[#001A3F]">
                 {isArabic
-                  ? "أحمد — التقدم الأكاديمي"
-                  : "Ahmed — learning progress"}
+                  ? "أحمد، التقدم الأكاديمي"
+                  : "Ahmed, learning progress"}
               </h3>
             </div>
 

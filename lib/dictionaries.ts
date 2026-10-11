@@ -15,7 +15,7 @@ export const en = {
       "All Courses: Quran, Arabic & School Subjects | Musbak Academy",
     catalogH1: "Explore our courses",
     catalogSub:
-      "17 live online courses in Quran memorization, Tajweed, Arabic, Islamic sciences and school subjects — for kids and adults, ages 4 and up.",
+      "Explore 17 live online courses in Quran memorization, Tajweed, Arabic, Islamic sciences and school subjects for kids and adults, ages 4 and up.",
     home: "Home",
     courses: "Courses",
     backToCourses: "Back to all courses",
@@ -36,6 +36,7 @@ export const en = {
     openMenu: "Open menu",
     closeMenu: "Close menu",
     switchLang: "Switch language",
+    signIn: "Sign in",
   },
   wa: {
     general:
@@ -261,7 +262,7 @@ export const en = {
   tutors: {
     eyebrow: "Our tutors",
     title: "Learn with teachers who care.",
-    sub: "A small, vetted team of Qur'an, Arabic and school-subject specialists — male and female tutors available.",
+    sub: "A carefully selected team of Qur'an, Arabic and school-subject specialists, with male and female tutors available.",
     items: [
       { name: "Ustadha Khadija", role: "Qur'an & Tajweed" },
       { name: "Ustadh Yusuf", role: "Hifz & Qira'at" },
@@ -325,7 +326,7 @@ export const en = {
   testimonials: {
     eyebrow: "Testimonials",
     title: "Loved by students and parents.",
-    disclaimer: "Sample messages — real parent reviews coming soon.",
+    disclaimer: "Sample messages. Parent reviews will be added when they are available.",
     items: [
       {
         quote:
@@ -389,14 +390,17 @@ export const en = {
   kicker: "WELCOME TO MUSBAK ACADEMY",
   line1: "Where your",
   line2: "knowledge journey begins.",
-  sub: "Qur'an, Arabic, Islamic Sciences & Academic Excellence — taught personally, wherever you are.",
+  mobileLine2: "knowledge",
+  mobileLine3: "journey begins.",
+  seeInAction: "See Musbak in Action",
+  sub: "Qur'an, Arabic, Islamic Sciences and Academic Excellence, taught personally wherever you are.",
   primary: "Explore the Academy",
   secondary: "Book a Free Trial",
   scroll: "Scroll",
 },
     paths: {
       title: "Two paths. One foundation.",
-      note: "Rooted in Qur'an and character — every path strengthens the other.",
+      note: "Rooted in Qur'an and character, each path strengthens the other.",
       divine: {
         label: "Divine Knowledge",
         items: ["Qur'an", "Hifz", "Tajweed", "Arabic", "Islamic Sciences"],
@@ -432,7 +436,7 @@ export const en = {
       verse: "وَقُل رَّبِّ زِدْنِي عِلْمًا",
       verseRef: "Qur'an 20:114",
       title: "The Qur'an, at the heart of it all.",
-      sub: "From first letters to full memorization — guided step by step, at your pace, with teachers who love what they teach.",
+      sub: "Learn step by step, at your pace, from first letters to full memorization with teachers who love what they teach.",
       items: [
         { name: "Qur'an Reading", desc: "From the alphabet to fluent recitation." },
         { name: "Tajweed", desc: "The rules of beautiful, correct recitation." },
@@ -443,7 +447,7 @@ export const en = {
     },
     curriculum: {
       title: "Explore the curriculum.",
-      sub: "Every subject has a clear path — from first steps to mastery.",
+      sub: "Every subject follows a clear path, from first steps to mastery.",
       paths: [
         { label: "Qur'an", steps: ["Reading", "Tajweed", "Hifz", "Revision", "Ijazah"] },
         { label: "Arabic", steps: ["Foundation", "Nahw", "Sarf", "Classical Arabic"] },
@@ -477,12 +481,12 @@ export const en = {
     },
     globe: {
       title: "Knowledge has no timezone.",
-      sub: "Students join us from around the world — same teachers, same care, every timezone.",
+      sub: "Students join us from around the world and receive the same care from the same teachers, across time zones.",
       regions: ["United Kingdom", "Nigeria", "Saudi Arabia", "United States", "France", "United Arab Emirates"],
     },
     portal: {
       title: "Your learning. One place.",
-      sub: "Progress, lessons and feedback — for students, parents and teachers alike.",
+      sub: "Students, parents and teachers can all follow lessons, progress and feedback.",
       badge: "Coming soon",
       tabs: [
         { label: "Student Portal", points: ["Qur'an progress", "Upcoming lessons", "Attendance", "Academic progress", "Milestones"] },
@@ -493,11 +497,11 @@ export const en = {
     why: {
       title: "Why families choose Musbak.",
       items: [
-        { title: "Qualified tutors", desc: "Screened for knowledge, teaching skill and character — many hold ijazah and university degrees." },
+        { title: "Qualified tutors", desc: "Screened for knowledge, teaching skill and character. Many hold ijazah and university degrees." },
         { title: "Personal learning plans", desc: "Every student starts with a plan built around their level, goals and pace." },
-        { title: "Flexible schedules", desc: "Mornings, evenings, weekends — classes built around your family, not the other way around." },
+        { title: "Flexible schedules", desc: "Choose morning, evening or weekend classes that fit your family." },
         { title: "Progress tracking", desc: "You always know where your child stands and what comes next." },
-        { title: "1-on-1 & small groups", desc: "Focused private classes or a small, motivated group — your choice." },
+        { title: "1-on-1 & small groups", desc: "Choose focused private classes or a small, motivated group." },
         { title: "Global accessibility", desc: "Wherever you live, a qualified teacher meets you online." },
       ],
     },
@@ -545,7 +549,7 @@ export const ar: Dict = {
     catalogTitle: "جميع الدورات: القرآن والعربية والمواد الدراسية | أكاديمية مسباك",
     catalogH1: "استكشف دوراتنا",
     catalogSub:
-      "17 دورة مباشرة عبر الإنترنت في تحفيظ القرآن والتجويد واللغة العربية والعلوم الشرعية والمواد الدراسية — للأطفال والكبار من سن 4 سنوات فما فوق.",
+      "اكتشف 17 دورة مباشرة عبر الإنترنت في تحفيظ القرآن والتجويد واللغة العربية والعلوم الشرعية والمواد الدراسية، للأطفال والكبار من سن 4 سنوات فما فوق.",
     home: "الرئيسية",
     courses: "الدورات",
     backToCourses: "العودة إلى كل الدورات",
@@ -565,6 +569,7 @@ export const ar: Dict = {
     openMenu: "فتح القائمة",
     closeMenu: "إغلاق القائمة",
     switchLang: "تغيير اللغة",
+    signIn: "تسجيل الدخول",
   },
   wa: {
     general: "السلام عليكم، أود معرفة المزيد عن أكاديمية مسباك العالمية.",
@@ -784,7 +789,7 @@ export const ar: Dict = {
   tutors: {
     eyebrow: "معلمونا",
     title: "تعلم مع معلمين يهتمون بك.",
-    sub: "فريق صغير منتقى من متخصصي القرآن والعربية والمواد الدراسية — معلمون ومعلمات متاحون.",
+    sub: "فريق مختار بعناية من متخصصي القرآن والعربية والمواد الدراسية، ويضم معلمين ومعلمات.",
     items: [
       { name: "أ. خديجة", role: "القرآن والتجويد" },
       { name: "أ. يوسف", role: "التحفيظ والقراءات" },
@@ -848,7 +853,7 @@ export const ar: Dict = {
   testimonials: {
     eyebrow: "آراء الطلاب",
     title: "محبة من الطلاب وأولياء الأمور.",
-    disclaimer: "رسائل توضيحية — آراء حقيقية من أولياء الأمور قادمة قريبًا.",
+    disclaimer: "هذه رسائل توضيحية. سنضيف آراء أولياء الأمور عند توفرها.",
     items: [
       {
         quote:
@@ -912,14 +917,17 @@ export const ar: Dict = {
   kicker: "مرحبًا بكم في أكاديمية مسباك",
   line1: "حيث تبدأ",
   line2: "رحلتك مع العلم.",
-  sub: "القرآن والعربية والعلوم الشرعية والتميز الأكاديمي — بتعليم شخصي أينما كنت.",
+  mobileLine2: "رحلتك مع",
+  mobileLine3: "العلم.",
+  seeInAction: "شاهد مسباك في الواقع",
+  sub: "القرآن والعربية والعلوم الشرعية والتميز الأكاديمي، بتعليم شخصي أينما كنت.",
   primary: "استكشف الأكاديمية",
   secondary: "احجز درسًا تجريبيًا مجانيًا",
   scroll: "مرّر",
 },
     paths: {
       title: "طريقان. أساس واحد.",
-      note: "مرتكزان على القرآن والخُلق — كل طريق يقوّي الآخر.",
+      note: "يرتكز الطريقان على القرآن والخُلق، ويقوّي كل منهما الآخر.",
       divine: {
         label: "العلوم الشرعية",
         items: ["القرآن", "الحفظ", "التجويد", "العربية", "العلوم الإسلامية"],
@@ -955,7 +963,7 @@ export const ar: Dict = {
       verse: "وَقُل رَّبِّ زِدْنِي عِلْمًا",
       verseRef: "طه ١١٤",
       title: "القرآن في قلب كل شيء.",
-      sub: "من الحروف الأولى إلى ختم الحفظ — خطوة بخطوة، على إيقاعك، مع معلمين يحبون ما يعلّمون.",
+      sub: "تعلّم خطوة بخطوة وعلى إيقاعك، من الحروف الأولى إلى ختم الحفظ، مع معلمين يحبون ما يعلّمون.",
       items: [
         { name: "قراءة القرآن", desc: "من الحروف إلى التلاوة المتقنة." },
         { name: "التجويد", desc: "أحكام التلاوة الصحيحة الجميلة." },
@@ -966,7 +974,7 @@ export const ar: Dict = {
     },
     curriculum: {
       title: "استكشف المنهج.",
-      sub: "لكل مادة طريق واضح — من أول خطوة إلى الإتقان.",
+      sub: "لكل مادة طريق واضح يبدأ بالخطوات الأولى ويقود إلى الإتقان.",
       paths: [
         { label: "القرآن", steps: ["القراءة", "التجويد", "الحفظ", "المراجعة", "الإجازة"] },
         { label: "العربية", steps: ["التأسيس", "النحو", "الصرف", "الفصحى الكلاسيكية"] },
@@ -1000,12 +1008,12 @@ export const ar: Dict = {
     },
     globe: {
       title: "للعلم لا توجد مناطق زمنية.",
-      sub: "ينضم إلينا طلاب من أنحاء العالم — نفس المعلمين ونفس الاهتمام، في كل توقيت.",
+      sub: "ينضم إلينا طلاب من أنحاء العالم ويحظون بالاهتمام نفسه من المعلمين أنفسهم في مختلف المناطق الزمنية.",
       regions: ["المملكة المتحدة", "نيجيريا", "السعودية", "الولايات المتحدة", "فرنسا", "الإمارات"],
     },
     portal: {
       title: "تعلمك. مكان واحد.",
-      sub: "التقدم والحصص والملاحظات — للطلاب وأولياء الأمور والمعلمين.",
+      sub: "يمكن للطلاب وأولياء الأمور والمعلمين متابعة التقدم والحصص والملاحظات.",
       badge: "قريبًا",
       tabs: [
         { label: "بوابة الطالب", points: ["تقدم القرآن", "الحصص القادمة", "الحضور", "التقدم الأكاديمي", "الإنجازات"] },
@@ -1016,11 +1024,11 @@ export const ar: Dict = {
     why: {
       title: "لماذا تختار العائلات مسباك.",
       items: [
-        { title: "معلمون مؤهلون", desc: "منتقون للعلم ومهارة التدريس والخُلق — وكثير منهم يحملون الإجازة وشهادات جامعية." },
+        { title: "معلمون مؤهلون", desc: "نختار المعلمين لعلمهم ومهارتهم في التدريس وخُلقهم. ويحمل كثير منهم الإجازة وشهادات جامعية." },
         { title: "خطط تعلم شخصية", desc: "كل طالب يبدأ بخطة مبنية على مستواه وأهدافه وإيقاعه." },
-        { title: "جداول مرنة", desc: "صباحًا ومساءً وفي نهاية الأسبوع — حصص على مقاس عائلتك." },
+        { title: "جداول مرنة", desc: "اختر حصصًا صباحية أو مسائية أو في نهاية الأسبوع بما يناسب عائلتك." },
         { title: "متابعة التقدم", desc: "تعرف دائمًا أين وصل ابنك وما الخطوة التالية." },
-        { title: "فردية ومجموعات صغيرة", desc: "حصص خاصة مركزة أو مجموعة صغيرة متحمسة — الخيار لك." },
+        { title: "فردية ومجموعات صغيرة", desc: "اختر حصصًا خاصة مركزة أو مجموعة صغيرة متحمسة." },
         { title: "وصول عالمي", desc: "أينما كنت، معلم مؤهل يلقاك عبر الإنترنت." },
       ],
     },
@@ -1067,7 +1075,7 @@ export const fr: Dict = {
       "Tous les cours : Coran, arabe et matières scolaires | Académie Musbak",
     catalogH1: "Découvrez nos cours",
     catalogSub:
-      "17 cours en direct en ligne : mémorisation du Coran, Tajwid, arabe, sciences islamiques et matières scolaires — pour enfants et adultes, dès 4 ans.",
+      "Découvrez 17 cours en ligne en direct : mémorisation du Coran, Tajwid, arabe, sciences islamiques et matières scolaires, pour enfants et adultes dès 4 ans.",
     home: "Accueil",
     courses: "Cours",
     backToCourses: "Retour à tous les cours",
@@ -1088,6 +1096,7 @@ export const fr: Dict = {
     openMenu: "Ouvrir le menu",
     closeMenu: "Fermer le menu",
     switchLang: "Changer de langue",
+    signIn: "Connexion",
   },
   wa: {
     general:
@@ -1313,7 +1322,7 @@ export const fr: Dict = {
   tutors: {
     eyebrow: "Nos tuteurs",
     title: "Apprenez avec des professeurs qui se soucient de vous.",
-    sub: "Une petite équipe sélectionnée de spécialistes du Coran, de l'arabe et des matières scolaires — tuteurs et tutrices disponibles.",
+    sub: "Une équipe soigneusement sélectionnée de spécialistes du Coran, de l’arabe et des matières scolaires, avec des tuteurs et tutrices.",
     items: [
       { name: "Oust. Khadija", role: "Coran & Tajwid" },
       { name: "Oust. Youssouf", role: "Hifz & Qiraat" },
@@ -1378,7 +1387,7 @@ export const fr: Dict = {
   testimonials: {
     eyebrow: "Témoignages",
     title: "Adoré par les élèves et les parents.",
-    disclaimer: "Messages d’exemple — les avis réels de parents arrivent bientôt.",
+    disclaimer: "Messages d’exemple. Les avis de parents seront ajoutés lorsqu’ils seront disponibles.",
     items: [
       {
         quote:
@@ -1442,14 +1451,17 @@ export const fr: Dict = {
   kicker: "BIENVENUE À L’ACADÉMIE MUSBAK",
   line1: "Là où commence",
   line2: "votre parcours de connaissance.",
-  sub: "Coran, arabe, sciences islamiques et excellence académique — un enseignement personnel, où que vous soyez.",
+  mobileLine2: "votre parcours de",
+  mobileLine3: "connaissance.",
+  seeInAction: "Voir Musbak en action",
+  sub: "Coran, arabe, sciences islamiques et excellence académique, avec un enseignement personnel où que vous soyez.",
   primary: "Découvrir l’Académie",
   secondary: "Réserver un essai gratuit",
   scroll: "Défiler",
 },
     paths: {
       title: "Deux voies. Une même fondation.",
-      note: "Enracinées dans le Coran et le caractère — chaque voie renforce l'autre.",
+      note: "Enracinées dans le Coran et le caractère, les deux voies se renforcent mutuellement.",
       divine: {
         label: "Savoir divin",
         items: ["Coran", "Hifz", "Tajwid", "Arabe", "Sciences islamiques"],
@@ -1485,7 +1497,7 @@ export const fr: Dict = {
       verse: "وَقُل رَّبِّ زِدْنِي عِلْمًا",
       verseRef: "Coran 20:114",
       title: "Le Coran au cœur de tout.",
-      sub: "Des premières lettres à la mémorisation complète — pas à pas, à votre rythme, avec des professeurs qui aiment ce qu'ils enseignent.",
+      sub: "Progressez pas à pas, à votre rythme, des premières lettres à la mémorisation complète avec des professeurs passionnés.",
       items: [
         { name: "Lecture du Coran", desc: "De l'alphabet à la récitation fluide." },
         { name: "Tajwid", desc: "Les règles d'une récitation correcte et belle." },
@@ -1496,7 +1508,7 @@ export const fr: Dict = {
     },
     curriculum: {
       title: "Explorez le programme.",
-      sub: "Chaque matière a un parcours clair — des premiers pas à la maîtrise.",
+      sub: "Chaque matière suit un parcours clair, des premiers pas jusqu’à la maîtrise.",
       paths: [
         { label: "Coran", steps: ["Lecture", "Tajwid", "Hifz", "Révision", "Ijazah"] },
         { label: "Arabe", steps: ["Fondation", "Nahw", "Sarf", "Arabe classique"] },
@@ -1530,12 +1542,12 @@ export const fr: Dict = {
     },
     globe: {
       title: "Le savoir n'a pas de fuseau horaire.",
-      sub: "Des élèves nous rejoignent du monde entier — mêmes professeurs, même attention, à toute heure.",
+      sub: "Des élèves nous rejoignent du monde entier et bénéficient de la même attention et des mêmes professeurs, quel que soit leur fuseau horaire.",
       regions: ["Royaume-Uni", "Nigéria", "Arabie Saoudite", "États-Unis", "France", "Émirats arabes unis"],
     },
     portal: {
       title: "Votre apprentissage. Un seul endroit.",
-      sub: "Progrès, cours et retours — pour les élèves, les parents et les professeurs.",
+      sub: "Élèves, parents et professeurs peuvent suivre les cours, les progrès et les retours.",
       badge: "Bientôt disponible",
       tabs: [
         { label: "Portail élève", points: ["Progression en Coran", "Prochains cours", "Assiduité", "Progrès académiques", "Étapes clés"] },
@@ -1546,11 +1558,11 @@ export const fr: Dict = {
     why: {
       title: "Pourquoi les familles choisissent Musbak.",
       items: [
-        { title: "Tuteurs qualifiés", desc: "Sélectionnés pour leur savoir, leur pédagogie et leur caractère — beaucoup détiennent une ijazah et des diplômes universitaires." },
+        { title: "Tuteurs qualifiés", desc: "Sélectionnés pour leur savoir, leur pédagogie et leur caractère. Beaucoup détiennent une ijazah et des diplômes universitaires." },
         { title: "Plans d'apprentissage personnels", desc: "Chaque élève commence avec un plan construit autour de son niveau, ses objectifs et son rythme." },
-        { title: "Horaires flexibles", desc: "Matins, soirs, week-ends — les cours s'adaptent à votre famille, pas l'inverse." },
+        { title: "Horaires flexibles", desc: "Choisissez des cours le matin, le soir ou le week-end, selon les besoins de votre famille." },
         { title: "Suivi des progrès", desc: "Vous savez toujours où en est votre enfant et quelle est la prochaine étape." },
-        { title: "Individuel & petits groupes", desc: "Cours privés ciblés ou petit groupe motivé — à vous de choisir." },
+        { title: "Individuel & petits groupes", desc: "Choisissez des cours privés ciblés ou un petit groupe motivé." },
         { title: "Accessibilité mondiale", desc: "Où que vous viviez, un professeur qualifié vous rencontre en ligne." },
       ],
     },

@@ -36,7 +36,7 @@ export default async function LangLayout({
   const dir = getDictionary(lang).dir;
 
   return (
-    <html lang={lang} dir={dir} className={`${fontVariables} h-full antialiased`}>
+    <html lang={lang} dir={dir} data-scroll-behavior="smooth" className={`${fontVariables} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-ink text-white">
         <script
           type="application/ld+json"

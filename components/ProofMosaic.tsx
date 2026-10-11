@@ -154,8 +154,9 @@ function VideoTile({
       <video
         ref={videoRef}
         src={src}
+        poster="/images/hero-poster.jpg"
         playsInline
-        preload="metadata"
+        preload="none"
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
         className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.035]"

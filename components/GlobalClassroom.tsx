@@ -38,8 +38,9 @@ function Pin({
         r="10"
         fill="#35B8FF"
         opacity="0.12"
+        style={{ transformBox: "fill-box", transformOrigin: "center" }}
         animate={{
-          r: [7, 15, 7],
+          scale: [0.7, 1.5, 0.7],
           opacity: [0.18, 0, 0.18],
         }}
         transition={{

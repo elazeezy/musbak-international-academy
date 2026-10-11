@@ -29,7 +29,7 @@ export async function requireRole(lang: string, role: Role) {
 
 export async function requireAnyRole(lang: string) {
   const actor = await getCurrentActor();
-  if (!actor) redirect(`/${lang}/login?error=session_not_established`);
+  if (!actor) redirect(`/${lang}/login`);
   if (actor.roles.length === 0) redirect(`/${lang}/login?error=account_not_activated`);
   return actor;
 }

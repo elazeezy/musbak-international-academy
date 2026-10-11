@@ -19,6 +19,7 @@ import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { MobileBar } from "@/components/MobileBar";
+import { MotionConfig } from "framer-motion";
 
 export const dynamic = "force-static";
 
@@ -37,6 +38,7 @@ export default async function HomePage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdScriptTag(faqJsonLd(t)) }}
       />
+      <MotionConfig reducedMotion="user">
       <Navbar />
       <main>
         <HeroCinematic />
@@ -56,6 +58,7 @@ export default async function HomePage({
       <Footer />
       <WhatsAppFloat />
       <MobileBar />
+      </MotionConfig>
     </>
   );
 }

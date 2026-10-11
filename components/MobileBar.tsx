@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLang } from "@/lib/i18n";
 import { waLink } from "@/lib/config";
 import { CloseIcon, WhatsAppIcon } from "./icons";
@@ -20,7 +20,32 @@ export function isMobileBarDismissed(): boolean {
 
 export function MobileBar() {
   const { t } = useLang();
-  const [visible, setVisible] = useState(!dismissed);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (dismissed) return;
+    const hero = document.getElementById("top");
+    if (!hero) return;
+    const vsl = document.getElementById("vsl");
+    let heroVisible = true;
+    let vslVisible = false;
+    const updateVisibility = () => {
+      setVisible(!heroVisible && !vslVisible && !dismissed);
+    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.target === hero) heroVisible = entry.isIntersecting;
+          if (entry.target === vsl) vslVisible = entry.isIntersecting;
+        }
+        updateVisibility();
+      },
+      { threshold: 0 },
+    );
+    observer.observe(hero);
+    if (vsl) observer.observe(vsl);
+    return () => observer.disconnect();
+  }, []);
 
   if (!visible) return null;
 
@@ -36,6 +61,7 @@ export function MobileBar() {
   return (
     <div
       className="
+        mobile-bar
         fixed
         inset-x-0
         bottom-0
@@ -79,14 +105,14 @@ export function MobileBar() {
             justify-center
             gap-3
             rounded-[16px]
-            bg-[#087CC1]
+            bg-[#35B8FF]
             px-4
-            text-white
-            shadow-[0_8px_25px_rgba(8,124,193,0.28)]
+            text-[#001A3F]
+            shadow-[0_8px_25px_rgba(53,184,255,0.22)]
             transition-all
             duration-200
             active:scale-[0.98]
-            hover:bg-[#17639A]
+            hover:bg-white
             focus-visible:outline-none
             focus-visible:ring-2
             focus-visible:ring-[#35B8FF]

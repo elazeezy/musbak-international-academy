@@ -112,7 +112,7 @@ export function WhyMusbak() {
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#607D90] sm:text-[15px]">
             {isArabic
               ? "تعلم مصمم حول الطالب، ومدعوم بعناية حقيقية في كل خطوة."
-              : "A learning experience built around the student — with real care at every step."}
+              : "A learning experience built around each student, with real care at every step."}
           </p>
         </motion.div>
 

@@ -21,6 +21,7 @@ export const amiri = localFont({
   ],
   variable: "--font-amiri",
   display: "swap",
+  preload: false,
 });
 
 /* Editorial display serif for major statements (Latin faces). */
@@ -29,6 +30,7 @@ export const fraunces = localFont({
   variable: "--font-fraunces",
   display: "swap",
   weight: "100 900",
+  preload: false,
 });
 
 export const fontVariables = `${sora.variable} ${cairo.variable} ${amiri.variable} ${fraunces.variable}`;

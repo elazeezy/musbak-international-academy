@@ -179,7 +179,7 @@ export function Journey() {
           className="absolute inset-0"
           style={{
             background:
-  "linear-gradient(180deg, rgba(221,241,255,0.62) 0%, rgba(221,241,255,0.52) 38%, rgba(241,249,253,0.62) 72%, rgba(255,255,255,0.82) 100%)",
+  "linear-gradient(180deg, rgba(221,241,255,0.42) 0%, rgba(221,241,255,0.34) 38%, rgba(241,249,253,0.43) 72%, rgba(255,255,255,0.68) 100%)",
           }}
         />
 
@@ -188,12 +188,12 @@ export function Journey() {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(circle at 50% 45%, rgba(255,255,255,0.25), rgba(221,241,255,0.08) 45%, rgba(255,255,255,0.45) 100%)",
+              "radial-gradient(circle at 50% 45%, rgba(255,255,255,0.16), rgba(221,241,255,0.05) 45%, rgba(255,255,255,0.28) 100%)",
           }}
         />
 
         {/* Gentle blur layer */}
-        <div className="absolute inset-0 bg-[#DDF1FF]/10 backdrop-blur-[1px]" />
+        <div className="absolute inset-0 bg-[#DDF1FF]/5" />
       </div>
 
       {/* =========================================================

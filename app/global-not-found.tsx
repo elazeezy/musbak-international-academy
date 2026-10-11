@@ -6,7 +6,7 @@ import { LANGS } from "@/lib/dictionaries";
 import { waLink } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title: "404 — Musbak International Academy",
+  title: "404 | Musbak International Academy",
   robots: { index: false },
 };
 

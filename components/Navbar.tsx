@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -62,10 +63,10 @@ function LangSwitcher() {
         aria-haspopup="menu"
         aria-label={t.nav.switchLang}
         className="
-          flex min-h-10 items-center gap-2 rounded-full
+          flex min-h-11 items-center gap-1.5 rounded-full
           border border-white/15
           bg-white/[0.035]
-          px-3.5
+          px-2
           text-[11px] font-semibold
           tracking-wide
           text-white/80
@@ -83,9 +84,10 @@ function LangSwitcher() {
       >
         <GlobeIcon className="h-3.5 w-3.5 text-[#35B8FF]" />
 
-        <span>
+        <span className="hidden min-[380px]:inline">
           {LANGUAGES.find((language) => language.code === lang)?.label}
         </span>
+        <span className="min-[380px]:hidden">{lang.toUpperCase()}</span>
 
         <ChevronDownIcon
           className={`h-3 w-3 text-white/45 transition-transform duration-200 ${
@@ -149,6 +151,11 @@ export function Navbar() {
 
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const mounted = useSyncExternalStore(
+    () => () => undefined,
+    () => true,
+    () => false,
+  );
 
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -189,8 +196,12 @@ export function Navbar() {
 
     const previousOverflow = document.body.style.overflow;
     const toggle = toggleRef.current;
+    const backgroundRoots = Array.from(document.body.children)
+      .filter((node): node is HTMLElement => node instanceof HTMLElement && !node.contains(menuRef.current))
+      .map((node) => ({ node, inert: node.inert }));
 
     document.body.style.overflow = "hidden";
+    backgroundRoots.forEach(({ node }) => { node.inert = true; });
 
     focusables()[0]?.focus();
 
@@ -241,6 +252,7 @@ export function Navbar() {
 
     return () => {
       document.body.style.overflow = previousOverflow;
+      backgroundRoots.forEach(({ node, inert }) => { node.inert = inert; });
 
       document.removeEventListener("keydown", onKey);
 
@@ -298,7 +310,7 @@ export function Navbar() {
         fixed inset-x-0 top-0 z-50
         transition-all duration-500
         ${
-          scrolled || open
+          scrolled
             ? `
               border-b border-white/[0.08]
               bg-[#001A3F]/82
@@ -323,7 +335,7 @@ export function Navbar() {
           w-full max-w-[1480px]
           items-center
           justify-between
-          px-5
+          px-3
           sm:px-8
           lg:px-10
           xl:px-14
@@ -349,7 +361,7 @@ export function Navbar() {
             height={230}
             priority
             className="
-  h-20
+  h-[54px]
   w-auto
   object-contain
   sm:h-[76px]
@@ -413,15 +425,16 @@ export function Navbar() {
             RIGHT ACTIONS
         --------------------------------------------------------- */}
 
-        <div className="flex items-center gap-2.5 sm:gap-3">
+        <div className="flex shrink-0 items-center gap-1.5 min-[380px]:gap-2.5 sm:gap-3">
           {/* Language */}
           <LangSwitcher />
 
           <Link
-            href={`/${lang}/login`}
-            className="hidden min-h-10 items-center rounded-full border border-white/15 px-4 text-[11px] font-semibold text-white/80 transition hover:border-white/35 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#35B8FF] sm:flex"
+            href={`/${lang}/portal`}
+            className="flex min-h-11 items-center justify-center rounded-full bg-[#35B8FF] px-2.5 text-[11px] font-bold text-[#001A3F] transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#35B8FF] min-[380px]:px-3.5 sm:px-4"
           >
-            {t.footer.portals}
+            <span className="hidden min-[380px]:inline">{t.nav.signIn}</span>
+            <span className="min-[380px]:hidden">{lang === "ar" ? "دخول" : lang === "fr" ? "Entrer" : "Login"}</span>
           </Link>
 
           {/* Primary CTA */}
@@ -481,7 +494,7 @@ export function Navbar() {
             type="button"
             onClick={() => setOpen((value) => !value)}
             aria-expanded={open}
-            aria-controls="mobile-menu"
+            aria-haspopup="dialog"
             aria-label={
               open
                 ? t.nav.closeMenu
@@ -489,8 +502,8 @@ export function Navbar() {
             }
             className="
               flex
-              min-h-10
-              min-w-10
+              min-h-11
+              min-w-11
               items-center
               justify-center
               rounded-full
@@ -521,199 +534,65 @@ export function Navbar() {
           MOBILE MENU
       =========================================================== */}
 
-      <div
-        id="mobile-menu"
-        ref={menuRef}
-        aria-hidden={!open}
-        className={`
-          fixed inset-0
-          flex flex-col
-          bg-[#001A3F]
-          px-5
-          pb-8
-          pt-[96px]
-          transition-all
-          duration-500
-          lg:hidden
-          ${
-            open
-              ? "visible opacity-100"
-              : "invisible opacity-0 pointer-events-none"
-          }
-        `}
-      >
-        {/* Atmospheric background */}
+      {mounted && open && createPortal(
         <div
-          className="pointer-events-none absolute inset-0 overflow-hidden"
-          aria-hidden="true"
+          id="mobile-menu"
+          ref={menuRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label={t.nav.openMenu}
+          className="fixed inset-0 z-[100] flex min-h-[100dvh] flex-col overflow-y-auto bg-[#001A3F] px-5 pb-[max(24px,env(safe-area-inset-bottom))] pt-[max(16px,env(safe-area-inset-top))] text-white animate-[menu-in_220ms_ease-out_both] motion-reduce:animate-none lg:hidden"
         >
-          <div className="absolute -right-32 top-20 h-80 w-80 rounded-full bg-[#35B8FF]/10 blur-[100px]" />
-
-          <div className="absolute -left-40 bottom-10 h-96 w-96 rounded-full bg-[#35B8FF]/5 blur-[110px]" />
-
-          <div
-            className="absolute inset-0 opacity-[0.025]"
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)",
-              backgroundSize: "64px 64px",
-            }}
-          />
-        </div>
-
-        {/* Mobile navigation */}
-        <nav
-          className="
-            relative z-10
-            flex flex-col
-            gap-1
-          "
-        >
-          {links.map((link, index) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setOpen(false)}
-              style={{
-                transitionDelay: open
-                  ? `${index * 45}ms`
-                  : "0ms",
-              }}
-              className={`
-                flex
-                min-h-14
-                items-center
-                justify-between
-                rounded-2xl
-                border
-                border-transparent
-                px-4
-                py-3
-                text-xl
-                font-semibold
-                tracking-[-0.02em]
-                text-white/90
-                transition-all
-                duration-300
-                hover:border-white/10
-                hover:bg-white/[0.05]
-                hover:text-white
-                focus-visible:outline-none
-                focus-visible:ring-2
-                focus-visible:ring-[#35B8FF]
-                ${
-                  open
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-3 opacity-0"
-                }
-              `}
-            >
-              <span>{link.label}</span>
-
-              <svg
-                width="17"
-                height="17"
-                viewBox="0 0 17 17"
-                fill="none"
-                aria-hidden="true"
-                className={
-                  isArabic ? "rotate-180 text-[#35B8FF]" : "text-[#35B8FF]"
-                }
-              >
-                <path
-                  d="M3.5 8.5h10M9 4l4.5 4.5L9 13"
-                  stroke="currentColor"
-                  strokeWidth="1.4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
-          ))}
-        </nav>
-
-        {/* Mobile bottom actions */}
-        <div
-          className={`
-            relative z-10
-            mt-auto
-            flex flex-col gap-5
-            border-t border-white/10
-            pt-6
-            transition-all
-            delay-200
-            duration-500
-            ${
-              open
-                ? "translate-y-0 opacity-100"
-                : "translate-y-4 opacity-0"
-            }
-          `}
-        >
-          {/* Language */}
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/35">
-              {t.nav.switchLang}
-            </span>
-
-            <LangSwitcher />
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+            <div className="absolute -right-32 top-20 h-80 w-80 rounded-full bg-[#35B8FF]/10 blur-[100px]" />
+            <div className="absolute -left-40 bottom-10 h-96 w-96 rounded-full bg-[#35B8FF]/5 blur-[110px]" />
           </div>
 
-          {/* CTA */}
-          <Link
-            href={`/${lang}/login`}
-            onClick={() => setOpen(false)}
-            className="flex min-h-12 items-center justify-center rounded-full border border-white/15 px-5 text-sm font-semibold text-white focus-visible:outline-2 focus-visible:outline-[#35B8FF]"
-          >
-            {t.footer.portals}
-          </Link>
-          <a
-            href={waLink(t.wa.trial)}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setOpen(false)}
-            className="
-              flex
-              min-h-12
-              items-center
-              justify-center
-              gap-2
-              rounded-full
-              bg-[#35B8FF]
-              px-5
-              text-sm
-              font-bold
-              text-[#001A3F]
-              transition-all
-              hover:bg-white
-              focus-visible:outline-none
-              focus-visible:ring-2
-              focus-visible:ring-[#35B8FF]
-              focus-visible:ring-offset-2
-              focus-visible:ring-offset-[#001A3F]
-            "
-          >
-            {t.nav.cta}
+          <div className="relative z-10 flex min-h-14 items-center justify-between border-b border-white/10 pb-4">
+            <Link href={`/${lang}`} onClick={() => setOpen(false)} aria-label="Musbak International Academy" className="rounded-xl focus-visible:outline-2 focus-visible:outline-[#35B8FF]">
+              <Image src="/musbak-logo.jpeg" alt="Musbak International Academy" width={320} height={230} className="h-12 w-auto object-contain" />
+            </Link>
+            <button type="button" onClick={() => setOpen(false)} aria-label={t.nav.closeMenu} className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-[#35B8FF]">
+              <CloseIcon className="h-5 w-5" />
+            </button>
+          </div>
 
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 15 15"
-              fill="none"
-              aria-hidden="true"
-              className={isArabic ? "rotate-180" : ""}
-            >
-              <path
-                d="M3 7.5h9M8 3.5l4 4-4 4"
-                stroke="currentColor"
-                strokeWidth="1.4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </a>
-        </div>
-      </div>
+          <nav aria-label={t.nav.openMenu} className="relative z-10 flex flex-col gap-1 pt-5">
+            {links.map((link, index) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                style={{ transitionDelay: `${index * 28}ms` }}
+                className="flex min-h-[60px] items-center justify-between rounded-xl border-b border-white/[0.08] px-3 py-3 text-xl font-semibold tracking-[-0.02em] text-white/90 transition duration-200 hover:bg-white/[0.05] hover:text-white focus-visible:outline-2 focus-visible:outline-[#35B8FF] motion-safe:animate-[menu-item-in_240ms_ease-out_both] motion-reduce:animate-none"
+              >
+                <span>{link.label}</span>
+                <svg width="17" height="17" viewBox="0 0 17 17" fill="none" aria-hidden="true" className={isArabic ? "rotate-180 text-[#35B8FF]" : "text-[#35B8FF]"}>
+                  <path d="M3.5 8.5h10M9 4l4.5 4.5L9 13" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
+            ))}
+          </nav>
+
+          <div className="relative z-10 mt-auto flex flex-col gap-3 border-t border-white/10 pt-5">
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-xs font-medium text-white/60">{t.nav.switchLang}</span>
+              <LangSwitcher />
+            </div>
+            <Link href={`/${lang}/portal`} onClick={() => setOpen(false)} className="flex min-h-12 items-center justify-center rounded-full border border-white/20 px-5 text-sm font-semibold text-white transition hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-[#35B8FF]">
+              {t.nav.signIn}
+            </Link>
+            <a href={waLink(t.wa.trial)} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)} className="flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#35B8FF] px-5 text-sm font-bold text-[#001A3F] transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#35B8FF]">
+              {t.nav.cta}
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true" className={isArabic ? "rotate-180" : ""}>
+                <path d="M3 7.5h9M8 3.5l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
+          </div>
+        </div>,
+        document.body,
+      )}
+
     </header>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import { useRef } from "react";
 import { useLang } from "@/lib/i18n";
 import { waLink } from "@/lib/wa";
@@ -48,23 +49,25 @@ export function FinalCTA() {
           }}
           className="absolute -inset-[5%]"
         >
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: "url('/images/hero-mosque.jpg')",
-            }}
+          <Image
+            src="/images/hero-mosque.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            quality={68}
+            className="object-cover object-center"
           />
         </motion.div>
 
         {/* Deep navy tint — keeps the mosque obvious while
             making the section feel cinematic rather than sky-blue */}
-        <div className="absolute inset-0 bg-[#001A3F]/65" />
+        <div className="absolute inset-0 bg-[#001A3F]/46" />
 
         {/* Stronger bottom gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#000F26] via-[#001A3F]/35 to-[#001A3F]/45" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#000F26]/90 via-[#001A3F]/25 to-[#001A3F]/32" />
 
         {/* Text protection */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,26,63,0.18)_0%,rgba(0,26,63,0.5)_70%,rgba(0,15,38,0.72)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,26,63,0.12)_0%,rgba(0,26,63,0.36)_70%,rgba(0,15,38,0.58)_100%)]" />
 
         {/* Cyan atmospheric glow */}
         <div
