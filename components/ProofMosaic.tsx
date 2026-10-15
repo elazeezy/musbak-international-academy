@@ -154,9 +154,9 @@ function VideoTile({
       <video
         ref={videoRef}
         src={src}
-        poster="/images/hero-poster.jpg"
         playsInline
-        preload="none"
+        muted
+        preload="metadata"
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
         className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.035]"
@@ -296,8 +296,13 @@ export function ProofMosaic() {
     },
 
     {
-      type: "placeholder",
-      label: isArabic ? "طلابنا" : "Our students",
+      type: "video",
+      src: "/videos/teaching-student.mp4",
+      label: isArabic
+        ? "درس مباشر مع المعلم"
+        : lang === "fr"
+          ? "Cours en direct avec l’enseignant"
+          : "A live lesson with the teacher",
       className: "lg:row-span-2",
     },
 
@@ -313,8 +318,13 @@ export function ProofMosaic() {
     },
 
     {
-      type: "placeholder",
-      label: isArabic ? "التعلم عن بُعد" : "Learning online",
+      type: "video",
+      src: "/videos/ustaz-reading.mp4",
+      label: isArabic
+        ? "الأستاذ يتلو القرآن"
+        : lang === "fr"
+          ? "L’oustaz récite le Coran"
+          : "The ustaz reciting Qur’an",
       className: "",
     },
 
@@ -395,7 +405,7 @@ export function ProofMosaic() {
             </p>
 
             <a
-              href="#vsl"
+              href="#inside-musbak-media"
               className="mt-5 inline-flex min-h-11 w-fit items-center gap-3 rounded-full bg-[#001A3F] px-5 py-3 text-xs font-bold text-white shadow-[0_10px_30px_rgba(0,26,63,0.16)] transition-all duration-300 hover:-translate-y-1 hover:bg-[#07518B] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#35B8FF]"
             >
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10">
@@ -419,7 +429,10 @@ export function ProofMosaic() {
             MEDIA MOSAIC
         ======================================================= */}
 
-        <div className="mt-12 grid auto-rows-[170px] grid-cols-2 gap-3 sm:auto-rows-[190px] sm:gap-4 lg:mt-14 lg:auto-rows-[185px] lg:grid-cols-4">
+        <div
+          id="inside-musbak-media"
+          className="mt-12 grid scroll-mt-24 auto-rows-[170px] grid-cols-2 gap-3 sm:auto-rows-[190px] sm:gap-4 lg:mt-14 lg:auto-rows-[185px] lg:grid-cols-4"
+        >
           {media.map((tile, index) => {
             if (tile.type === "video" && tile.src) {
               return (
