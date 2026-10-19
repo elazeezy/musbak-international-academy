@@ -227,6 +227,86 @@ export async function inviteAccountAction(formData: FormData): Promise<PortalInv
   return { ok: true, email: parsed.data.email, actionLink: data.properties.action_link, role: parsed.data.role };
 }
 
+export type CreatePortalAccountResult =
+  | { ok: true; email: string; password: string; name: string; role: "teacher" | "parent" | "adult_student"; enrolled: number }
+  | { ok: false; reason: "invalid" | "account_exists" | "failed" };
+
+const createAccountSchema = z.object({
+  name: z.string().trim().min(2).max(100),
+  email: z.string().trim().toLowerCase().email().max(254),
+  password: z.string().min(8).max(128),
+  role: z.enum(["teacher", "parent", "adult_student"]),
+});
+
+/*
+ * Direct account creation. The admin chooses the email + password; the account
+ * is usable immediately (email pre-confirmed), so the person can sign in right
+ * away and land in their portal. For adult students we also create the student
+ * record and (optionally) activate the classes/courses they are taking.
+ */
+export async function createPortalAccountAction(formData: FormData): Promise<CreatePortalAccountResult> {
+  const rawLang = String(value(formData, "lang") ?? "en");
+  const lang = langSchema.safeParse(rawLang).data ?? "en";
+  const actor = await requireRole(lang, "admin");
+  const parsed = createAccountSchema.safeParse({
+    name: value(formData, "name"),
+    email: value(formData, "email"),
+    password: value(formData, "password"),
+    role: value(formData, "role"),
+  });
+  if (!parsed.success) return { ok: false, reason: "invalid" };
+  const classIds = [...new Set(formData.getAll("class_ids").map(String))].filter((id) =>
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)
+  );
+  const admin = createSupabaseAdminClient();
+  const { data: created, error } = await admin.auth.admin.createUser({
+    email: parsed.data.email,
+    password: parsed.data.password,
+    email_confirm: true,
+    user_metadata: { display_name: parsed.data.name, preferred_language: lang },
+  });
+  if (error || !created?.user) {
+    const message = error?.message?.toLowerCase() ?? "";
+    const reason = message.includes("already") || message.includes("registered") || message.includes("exists") ? "account_exists" : "failed";
+    return { ok: false, reason };
+  }
+  const userId = created.user.id;
+  const { error: roleError } = await admin.from("user_roles").upsert(
+    { user_id: userId, role: parsed.data.role, granted_by: actor.user.id, revoked_at: null },
+    { onConflict: "user_id,role" }
+  );
+  if (roleError) {
+    await admin.auth.admin.deleteUser(userId);
+    return { ok: false, reason: "failed" };
+  }
+  let enrolled = 0;
+  if (parsed.data.role === "teacher") {
+    const { data: staff } = await admin.from("staff_members").upsert({ user_id: userId, status: "active" }, { onConflict: "user_id" }).select("id").single();
+    if (staff && classIds.length) {
+      const today = new Date().toISOString().slice(0, 10);
+      const rows = classIds.map((class_group_id) => ({ staff_member_id: staff.id, class_group_id, starts_on: today }));
+      const { error: assignError } = await admin.from("teacher_assignments").upsert(rows, { onConflict: "class_group_id,staff_member_id,starts_on" });
+      if (!assignError) enrolled = classIds.length;
+    }
+  }
+  if (parsed.data.role === "adult_student") {
+    const { data: student } = await admin.from("students").insert({ display_name: parsed.data.name, auth_user_id: userId }).select("id").single();
+    if (student) {
+      await admin.from("student_private_details").insert({ student_id: student.id, legal_name: parsed.data.name });
+      if (classIds.length) {
+        const rows = classIds.map((class_group_id) => ({ student_id: student.id, class_group_id, status: "active" as const, ended_at: null }));
+        const { error: enrollError } = await admin.from("enrollments").upsert(rows, { onConflict: "student_id,class_group_id" });
+        if (!enrollError) enrolled = classIds.length;
+      }
+    }
+  }
+  await admin.from("audit_logs").insert({ actor_id: actor.user.id, action: "account_created", target_table: "user_roles", target_id: userId, safe_details: { role: parsed.data.role, enrolled } });
+  revalidatePath(`/${lang}/portal/admin/staff`);
+  revalidatePath(`/${lang}/portal/admin/students`);
+  revalidatePath(`/${lang}/portal/admin/guardians`);
+  return { ok: true, email: parsed.data.email, password: parsed.data.password, name: parsed.data.name, role: parsed.data.role, enrolled };
+}
+
 export async function sendAnnouncementAction(formData: FormData): Promise<void> {
   const rawLang = String(value(formData, "lang") ?? "en");
   const lang = langSchema.safeParse(rawLang).data ?? "en";

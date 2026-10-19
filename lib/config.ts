@@ -41,3 +41,4 @@ export const site = {
 export function waLink(message: string, number: string = site.whatsapp): string {
   return `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
 }
+

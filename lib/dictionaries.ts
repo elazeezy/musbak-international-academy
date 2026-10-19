@@ -488,7 +488,7 @@ export const en = {
         {
           name: "Ustadha Aminah",
           gender: "female",
-          creds: "",
+          creds: "B.Sc. Degree Holder",
         },
         {
           name: "Ustadh Abdullateef",
@@ -1037,7 +1037,7 @@ export const ar: Dict = {
         {
           name: "أ. آمنة",
           gender: "female",
-          creds: "",
+          creds: "حاصلة على بكالوريوس العلوم",
         },
         {
           name: "أ. عبد اللطيف",
@@ -1593,7 +1593,7 @@ export const fr: Dict = {
         {
           name: "Oust. Aminah",
           gender: "female",
-          creds: "",
+          creds: "Titulaire d'une Licence en sciences (B.Sc.)",
         },
         {
           name: "Oust. Abdullateef",
