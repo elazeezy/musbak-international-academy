@@ -214,7 +214,7 @@ export function VSLSection() {
               {video ? (
                 <video
                   src={video}
-                  poster="/images/hero-poster.jpg"
+                  poster="/images/hero-poster.webp"
                   muted
                   playsInline
                   preload="none"
@@ -374,7 +374,7 @@ export function VSLSection() {
             >
               <video
                 src={video}
-                poster="/images/hero-poster.jpg"
+                poster="/images/hero-poster.webp"
                 controls
                 autoPlay
                 playsInline

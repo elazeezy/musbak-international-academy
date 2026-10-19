@@ -163,7 +163,7 @@ export function Journey() {
         className="pointer-events-none absolute inset-0"
       >
         <Image
-          src="/images/journey-mosque-landscape.png"
+          src="/images/journey-mosque-landscape.webp"
           alt=""
           fill
           priority={false}

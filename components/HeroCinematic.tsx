@@ -112,8 +112,8 @@ export function HeroCinematic() {
             src="/images/hero-mosque.webp"
             alt=""
             fill
-            loading="eager"
-            fetchPriority="low"
+            priority
+            fetchPriority="high"
             quality={70}
             sizes="100vw"
             className="

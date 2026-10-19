@@ -8,6 +8,7 @@ import { useLang } from "@/lib/i18n";
 type MediaTile = {
   type: "video" | "image" | "placeholder";
   src?: string;
+  poster?: string;
   label: string;
   className: string;
   accent?: string;
@@ -113,11 +114,13 @@ function VideoTile({
   src,
   label,
   className,
+  poster,
   featured = false,
 }: {
   src: string;
   label: string;
   className: string;
+  poster?: string;
   featured?: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -154,9 +157,10 @@ function VideoTile({
       <video
         ref={videoRef}
         src={src}
+        poster={poster}
         playsInline
         muted
-        preload="metadata"
+        preload="none"
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
         className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.035]"
@@ -298,6 +302,7 @@ export function ProofMosaic() {
     {
       type: "video",
       src: "/videos/teaching-student.mp4",
+      poster: "/images/proof-1.jpg",
       label: isArabic
         ? "درس مباشر مع المعلم"
         : lang === "fr"
@@ -320,6 +325,7 @@ export function ProofMosaic() {
     {
       type: "video",
       src: "/videos/ustaz-reading.mp4",
+      poster: "/images/proof-2.jpg",
       label: isArabic
         ? "الأستاذ يتلو القرآن"
         : lang === "fr"
@@ -449,6 +455,7 @@ export function ProofMosaic() {
                 <VideoTile
                   key={`${tile.label}-${index}`}
                   src={tile.src}
+                  poster={tile.poster}
                   label={tile.label}
                   className={tile.className}
                   featured={tile.accent === "featured"}
