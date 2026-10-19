@@ -158,7 +158,7 @@ export function VSLSection() {
 
               <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#72CFFF] sm:text-[10px]">
                 {isArabic
-                  ? "شاهد مسباك في الواقع"
+                  ? "شاهد مسباق في الواقع"
                 : isFrench
                   ? "DÉCOUVREZ MUSBAK EN ACTION"
                   : "SEE MUSBAK IN ACTION"}
@@ -177,7 +177,7 @@ export function VSLSection() {
 
             <p className="mx-auto mt-3 max-w-xl text-xs leading-6 text-white/55 sm:text-sm">
               {isArabic
-                ? "ألقِ نظرة أقرب على طريقة التعلم في مسباك."
+                ? "ألقِ نظرة أقرب على طريقة التعلم في مسباق."
                 : isFrench
                   ? "Découvrez de plus près l’expérience d’apprentissage chez Musbak."
                   : "Take a closer look at how learning with Musbak comes to life."}
@@ -343,7 +343,7 @@ export function VSLSection() {
             aria-modal="true"
             aria-label={
               isArabic
-                ? "فيديو مسباك التعريفي"
+                ? "فيديو مسباق التعريفي"
                 : isFrench
                   ? "Vidéo de présentation de Musbak"
                   : "Musbak Academy introduction video"

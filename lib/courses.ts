@@ -17,7 +17,7 @@ const COURSES: Record<CourseId, CourseCopy> = {
   "quran-memorization": {
     metaTitle: {
       en: "Quran Memorization (Hifz) Online — Memorize with a Personal Plan | Musbak Academy",
-      ar: "تحفيظ القرآن الكريم أونلاين — احفظ بخطة شخصية | أكاديمية مسباك",
+      ar: "تحفيظ القرآن الكريم أونلاين — احفظ بخطة شخصية | أكاديمية مسباق",
       fr: "Mémorisation du Coran (Hifz) en ligne — avec un plan personnel | Académie Musbak",
     },
     description: {
@@ -29,7 +29,7 @@ const COURSES: Record<CourseId, CourseCopy> = {
   tajweed: {
     metaTitle: {
       en: "Tajweed Online — Recite the Quran Correctly & Beautifully | Musbak Academy",
-      ar: "التجويد أونلاين — اتلو القرآن بإتقان وجمال | أكاديمية مسباك",
+      ar: "التجويد أونلاين — اتلو القرآن بإتقان وجمال | أكاديمية مسباق",
       fr: "Tajwid en ligne — réciter le Coran avec précision et beauté | Académie Musbak",
     },
     description: {
@@ -41,7 +41,7 @@ const COURSES: Record<CourseId, CourseCopy> = {
   tafsir: {
     metaTitle: {
       en: "Tafsir Online — Understand the Meaning of Every Verse | Musbak Academy",
-      ar: "التفسير أونلاين — افهم معاني الآيات والتدبر | أكاديمية مسباك",
+      ar: "التفسير أونلاين — افهم معاني الآيات والتدبر | أكاديمية مسباق",
       fr: "Tafsir en ligne — comprendre le sens de chaque verset | Académie Musbak",
     },
     description: {
@@ -53,7 +53,7 @@ const COURSES: Record<CourseId, CourseCopy> = {
   "arabic-language": {
     metaTitle: {
       en: "Arabic Language Online — Read, Write & Speak from Scratch | Musbak Academy",
-      ar: "اللغة العربية أونلاين — اقرأ واكتب وتحدث من الصفر | أكاديمية مسباك",
+      ar: "اللغة العربية أونلاين — اقرأ واكتب وتحدث من الصفر | أكاديمية مسباق",
       fr: "Arabe en ligne — lire, écrire et parler depuis zéro | Académie Musbak",
     },
     description: {
@@ -65,7 +65,7 @@ const COURSES: Record<CourseId, CourseCopy> = {
   nahw: {
     metaTitle: {
       en: "Arabic Grammar (Nahw) Online — Master It Sentence by Sentence | Musbak Academy",
-      ar: "النحو العربي أونلاين — أتقنه جملة جملة | أكاديمية مسباك",
+      ar: "النحو العربي أونلاين — أتقنه جملة جملة | أكاديمية مسباق",
       fr: "Grammaire arabe (Nahw) en ligne — maîtriser phrase par phrase | Académie Musbak",
     },
     description: {
@@ -77,7 +77,7 @@ const COURSES: Record<CourseId, CourseCopy> = {
   sarf: {
     metaTitle: {
       en: "Arabic Morphology (Sarf) Online — Unlock Word Patterns & Roots | Musbak Academy",
-      ar: "الصرف العربي أونلاين — افتح أسرار الجذور والأوزان | أكاديمية مسباك",
+      ar: "الصرف العربي أونلاين — افتح أسرار الجذور والأوزان | أكاديمية مسباق",
       fr: "Morphologie arabe (Sarf) en ligne — déverrouiller racines et schémas | Académie Musbak",
     },
     description: {
@@ -89,7 +89,7 @@ const COURSES: Record<CourseId, CourseCopy> = {
   tawheed: {
     metaTitle: {
       en: "Tawheed Online — Build Sound Islamic Belief on Authentic Knowledge | Musbak Academy",
-      ar: "التوحيد أونلاين — ابنِ عقيدة سليمة على علم صحيح | أكاديمية مسباك",
+      ar: "التوحيد أونلاين — ابنِ عقيدة سليمة على علم صحيح | أكاديمية مسباق",
       fr: "Tawhid en ligne — bâtir une croyance authentique sur le savoir | Académie Musbak",
     },
     description: {
@@ -101,7 +101,7 @@ const COURSES: Record<CourseId, CourseCopy> = {
   fiqh: {
     metaTitle: {
       en: "Fiqh Online — Practical Rulings for Daily Worship | Musbak Academy",
-      ar: "الفقه أونلاين — أحكام عملية لعبادتك اليومية | أكاديمية مسباك",
+      ar: "الفقه أونلاين — أحكام عملية لعبادتك اليومية | أكاديمية مسباق",
       fr: "Fiqh en ligne — les règles pratiques du culte quotidien | Académie Musbak",
     },
     description: {
@@ -113,7 +113,7 @@ const COURSES: Record<CourseId, CourseCopy> = {
   adab: {
     metaTitle: {
       en: "Islamic Manners (Adab) Online — Grow Beautiful Character | Musbak Academy",
-      ar: "الأدب الإسلامي أونلاين — اكتسب خلقًا كريمًا | أكاديمية مسباك",
+      ar: "الأدب الإسلامي أونلاين — اكتسب خلقًا كريمًا | أكاديمية مسباق",
       fr: "Adab en ligne — développer le beau caractère | Académie Musbak",
     },
     description: {
@@ -125,7 +125,7 @@ const COURSES: Record<CourseId, CourseCopy> = {
   seerah: {
     metaTitle: {
       en: "Seerah Online — Journey Through the Prophet's Life ﷺ | Musbak Academy",
-      ar: "السيرة النبوية أونلاين — رحلة عبر حياة النبي ﷺ | أكاديمية مسباك",
+      ar: "السيرة النبوية أونلاين — رحلة عبر حياة النبي ﷺ | أكاديمية مسباق",
       fr: "Sira en ligne — la vie du Prophète ﷺ | Académie Musbak",
     },
     description: {
@@ -137,7 +137,7 @@ const COURSES: Record<CourseId, CourseCopy> = {
   "islamic-studies": {
     metaTitle: {
       en: "Islamic Studies Online — A Complete Foundation in One Course | Musbak Academy",
-      ar: "الدراسات الإسلامية أونلاين — أساس متكامل في دورة واحدة | أكاديمية مسباك",
+      ar: "الدراسات الإسلامية أونلاين — أساس متكامل في دورة واحدة | أكاديمية مسباق",
       fr: "Études islamiques en ligne — une base complète en un cours | Académie Musbak",
     },
     description: {
@@ -149,7 +149,7 @@ const COURSES: Record<CourseId, CourseCopy> = {
   "english-language": {
     metaTitle: {
       en: "English Classes Online — Speak & Write with Confidence | Musbak Academy",
-      ar: "اللغة الإنجليزية أونلاين — تحدث واكتب بثقة | أكاديمية مسباك",
+      ar: "اللغة الإنجليزية أونلاين — تحدث واكتب بثقة | أكاديمية مسباق",
       fr: "Cours d'anglais en ligne — parler et écrire en confiance | Académie Musbak",
     },
     description: {
@@ -161,7 +161,7 @@ const COURSES: Record<CourseId, CourseCopy> = {
   mathematics: {
     metaTitle: {
       en: "Mathematics Tutoring Online — From the Basics to Calculus | Musbak Academy",
-      ar: "الرياضيات أونلاين — من الأساسيات إلى التفاضل | أكاديمية مسباك",
+      ar: "الرياضيات أونلاين — من الأساسيات إلى التفاضل | أكاديمية مسباق",
       fr: "Maths en ligne — des bases au calcul différentiel | Académie Musbak",
     },
     description: {
@@ -173,7 +173,7 @@ const COURSES: Record<CourseId, CourseCopy> = {
   biology: {
     metaTitle: {
       en: "Biology Tutoring Online — Understand Living Systems & Score Higher | Musbak Academy",
-      ar: "الأحياء أونلاين — افهم الكائنات الحية وارتقِ في درجاتك | أكاديمية مسباك",
+      ar: "الأحياء أونلاين — افهم الكائنات الحية وارتقِ في درجاتك | أكاديمية مسباق",
       fr: "Biologie en ligne — comprendre le vivant et réussir | Académie Musbak",
     },
     description: {
@@ -185,7 +185,7 @@ const COURSES: Record<CourseId, CourseCopy> = {
   chemistry: {
     metaTitle: {
       en: "Chemistry Tutoring Online — Master Reactions, Equations & Exam Technique | Musbak Academy",
-      ar: "الكيمياء أونلاين — أتقن التفاعلات والمعادلات وأسلوب الامتحان | أكاديمية مسباك",
+      ar: "الكيمياء أونلاين — أتقن التفاعلات والمعادلات وأسلوب الامتحان | أكاديمية مسباق",
       fr: "Chimie en ligne — maîtriser réactions, équations et technique d'examen | Académie Musbak",
     },
     description: {
@@ -197,7 +197,7 @@ const COURSES: Record<CourseId, CourseCopy> = {
   physics: {
     metaTitle: {
       en: "Physics Tutoring Online — Understand Deeply, Solve with Confidence | Musbak Academy",
-      ar: "الفيزياء أونلاين — افهم بعمق وحل بثقة | أكاديمية مسباك",
+      ar: "الفيزياء أونلاين — افهم بعمق وحل بثقة | أكاديمية مسباق",
       fr: "Physique en ligne — comprendre en profondeur, résoudre avec assurance | Académie Musbak",
     },
     description: {
@@ -209,7 +209,7 @@ const COURSES: Record<CourseId, CourseCopy> = {
   "school-curriculum": {
     metaTitle: {
       en: "School Curriculum Support Online — All Subjects, One Plan | Musbak Academy",
-      ar: "دعم المنهج الدراسي أونلاين — كل المواد بخطة واحدة | أكاديمية مسباك",
+      ar: "دعم المنهج الدراسي أونلاين — كل المواد بخطة واحدة | أكاديمية مسباق",
       fr: "Soutien scolaire en ligne — toutes les matières, un seul plan | Académie Musbak",
     },
     description: {

@@ -370,7 +370,7 @@ export function Footer() {
 
               <p className="mt-1 text-[10px] text-[#7895A7]">
                 {lang === "ar"
-                  ? "ابدأ بخطوة بسيطة مع مسباك."
+                  ? "ابدأ بخطوة بسيطة مع مسباق."
                   : "Start with one simple step at Musbak."}
               </p>
             </div>

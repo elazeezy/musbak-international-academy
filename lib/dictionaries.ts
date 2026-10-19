@@ -456,26 +456,49 @@ export const en = {
       ],
     },
     teachers: {
-      title: "Meet your teachers.",
-      sub: "Qualified, vetted, and chosen for their character as much as their knowledge.",
+      title: "Our team of qualified tutors.",
+      sub: "Meet our dedicated team of tutors, committed to providing quality education in Islamic studies, Qur'anic studies, Arabic language, and other academic subjects.",
       items: [
         {
-          name: "Ustadha Khadija",
-          specialty: "Qur'an & Tajweed",
-          creds: "Ijazah in Hafs · 8 years teaching children and adults",
-          quote: "Every child can love the Qur'an. My job is to prove it, one class at a time.",
+          name: "Ustadh Luqman",
+          gender: "male",
+          creds: "PhD in View",
         },
         {
-          name: "Ustadh Yusuf",
-          specialty: "Hifz & Qira'at",
-          creds: "Certified in Qira'at · Memorization mentor",
-          quote: "Memorization is not talent. It is a system, patience, and daily companionship.",
+          name: "Ustadha Muhsinah",
+          gender: "female",
+          creds: "B.A. in Arabic Language",
         },
         {
-          name: "Ustadha Maryam",
-          specialty: "Arabic & Islamic Studies",
-          creds: "BA Arabic Language · Curriculum designer",
-          quote: "Language opens doors. Arabic opens the door to the Qur'an itself.",
+          name: "Ustadh Badirudeen",
+          gender: "male",
+          creds: "M.A. in Shariah Law",
+        },
+        {
+          name: "Ustadh Abdulmumin",
+          gender: "male",
+          creds: "Holder of an Ijazah in Qur'an Memorisation",
+        },
+        {
+          name: "Ustadh Sideeq",
+          gender: "male",
+          creds:
+            "Holder of an Ijazah in the Seven Qira'at (Qur'anic Recitation Traditions)",
+        },
+        {
+          name: "Ustadha Aminah",
+          gender: "female",
+          creds: "",
+        },
+        {
+          name: "Ustadh Abdullateef",
+          gender: "male",
+          creds: "B.Sc. Degree Holder",
+        },
+        {
+          name: "Ustadh Abdulmujeeb",
+          gender: "male",
+          creds: "B.A. in Combined Law",
         },
       ],
     },
@@ -541,12 +564,12 @@ export type Dict = typeof en;
 export const ar: Dict = {
   dir: "rtl" as const,
   meta: {
-    title: "تعلم القرآن الكريم أونلاين مع معلمين مجازين | أكاديمية مسباك",
+    title: "تعلم القرآن الكريم أونلاين مع معلمين مجازين | أكاديمية مسباق",
     description:
       "حصص مباشرة عبر الإنترنت في القرآن الكريم والتجويد والتحفيظ واللغة العربية والمواد الدراسية للأطفال والكبار من سن 4 سنوات. معلمون مؤهلون، حصص فردية أو مجموعات صغيرة. احجز حصتك التجريبية عبر واتساب.",
   },
   seo: {
-    catalogTitle: "جميع الدورات: القرآن والعربية والمواد الدراسية | أكاديمية مسباك",
+    catalogTitle: "جميع الدورات: القرآن والعربية والمواد الدراسية | أكاديمية مسباق",
     catalogH1: "استكشف دوراتنا",
     catalogSub:
       "اكتشف 17 دورة مباشرة عبر الإنترنت في تحفيظ القرآن والتجويد واللغة العربية والعلوم الشرعية والمواد الدراسية، للأطفال والكبار من سن 4 سنوات فما فوق.",
@@ -561,7 +584,7 @@ export const ar: Dict = {
   nav: {
     programs: "البرامج",
     how: "كيف تبدأ",
-    why: "لماذا مسباك",
+    why: "لماذا مسباق",
     pricing: "الأسعار",
     testimonials: "آراء الطلاب",
     faq: "الأسئلة الشائعة",
@@ -572,15 +595,15 @@ export const ar: Dict = {
     signIn: "تسجيل الدخول",
   },
   wa: {
-    general: "السلام عليكم، أود معرفة المزيد عن أكاديمية مسباك العالمية.",
+    general: "السلام عليكم، أود معرفة المزيد عن أكاديمية مسباق العالمية.",
     trial: "السلام عليكم، أود حجز حصة تجريبية مجانية.",
-    pricing: "السلام عليكم، أود الاستفسار عن الأسعار والخطط في أكاديمية مسباك.",
+    pricing: "السلام عليكم، أود الاستفسار عن الأسعار والخطط في أكاديمية مسباق.",
     plan: (plan: string) =>
       `السلام عليكم، أنا مهتم بخطة ${plan}. أرجو مشاركة التفاصيل.`,
     enroll:
-      "السلام عليكم، أريد أن أصبح طالبًا في أكاديمية مسباك العالمية. كيف أُسجّل؟",
+      "السلام عليكم، أريد أن أصبح طالبًا في أكاديمية مسباق العالمية. كيف أُسجّل؟",
     learn: (course: string) =>
-      `السلام عليكم، أريد تعلم ${course} في أكاديمية مسباك. أرجو مشاركة المزيد.`,
+      `السلام عليكم، أريد تعلم ${course} في أكاديمية مسباق. أرجو مشاركة المزيد.`,
     track: (track: string) =>
       `السلام عليكم، أنا مهتم بمسار ${track}. أرجو مشاركة التفاصيل.`,
   },
@@ -590,10 +613,10 @@ export const ar: Dict = {
     questionAccent: "القرآن والعربية",
     question2: "أو التفوق دراسيًا؟",
     sub: "حصص مباشرة عبر الإنترنت مع معلمين مؤهلين للأطفال والكبار من سن 4 سنوات، فردية أو في مجموعات صغيرة، من أي مكان في العالم.",
-    videoLabel: "شاهد ما تقدمه مسباك",
+    videoLabel: "شاهد ما تقدمه مسباق",
     videoCaption: "كل ما تحتاج معرفته عن الأكاديمية في أقل من دقيقة.",
     unmute: "اضغط لتشغيل الصوت",
-    covered1: "أكاديمية مسباك العالمية",
+    covered1: "أكاديمية مسباق العالمية",
     coveredAccent: "معك.",
     coursesLabel: "نقدم هذه الدورات",
     selectPlaceholder: "اختر دورة...",
@@ -667,10 +690,10 @@ export const ar: Dict = {
     items: ["حصة تجريبية", "بدون بيانات دفع", "بدّل المعلم في أي وقت"],
   },
   about: {
-    eyebrow: "عن مسباك",
+    eyebrow: "عن مسباق",
     badge: "+500 حصة مُقدَّمة",
     title: "أكاديمية واحدة. عالمان من العلم.",
-    p1: "أكاديمية مسباك العالمية مدرسة إلكترونية يتعلم فيها الأطفال والكبار القرآن والعربية والعلوم الشرعية إلى جانب المناهج الدراسية: مباشرةً وبأسلوب شخصي ومن راحة البيت.",
+    p1: "أكاديمية مسباق العالمية مدرسة إلكترونية يتعلم فيها الأطفال والكبار القرآن والعربية والعلوم الشرعية إلى جانب المناهج الدراسية: مباشرةً وبأسلوب شخصي ومن راحة البيت.",
     p2: "سواء كان طفلًا في الخامسة يبدأ القاعدة، أو مراهقًا يستعد للامتحانات، أو بالغًا يبدأ رحلة الحفظ، لكل طالب خطة ومعلم وجدول مصمم حوله.",
     points: [
       "معلمون مؤهلون ومنتقون",
@@ -757,7 +780,7 @@ export const ar: Dict = {
     source: "رواه مسلم",
   },
   why: {
-    eyebrow: "لماذا مسباك",
+    eyebrow: "لماذا مسباق",
     title: "صُممت للعائلات والجداول الحقيقية.",
     features: [
       {
@@ -869,7 +892,7 @@ export const ar: Dict = {
       },
       {
         quote:
-          "مسباك يدير قرآن ابني وعربيته ورياضياته في مكان واحد. رسالة واتساب واحدة ويُرتَّب كل شيء.",
+          "مسباق يدير قرآن ابني وعربيته ورياضياته في مكان واحد. رسالة واتساب واحدة ويُرتَّب كل شيء.",
         name: "فاطمة",
         role: "ولية أمر · كندا",
       },
@@ -914,12 +937,12 @@ export const ar: Dict = {
   },
   landing: {
    hero: {
-  kicker: "مرحبًا بكم في أكاديمية مسباك",
+  kicker: "مرحبًا بكم في أكاديمية مسباق",
   line1: "حيث تبدأ",
   line2: "رحلتك مع العلم.",
   mobileLine2: "رحلتك مع",
   mobileLine3: "العلم.",
-  seeInAction: "شاهد مسباك في الواقع",
+  seeInAction: "شاهد مسباق في الواقع",
   sub: "القرآن والعربية والعلوم الشرعية والتميز الأكاديمي، بتعليم شخصي أينما كنت.",
   primary: "استكشف الأكاديمية",
   secondary: "احجز درسًا تجريبيًا مجانيًا",
@@ -938,7 +961,7 @@ export const ar: Dict = {
       },
     },
     journey: {
-      title: "رحلتك مع مسباك.",
+      title: "رحلتك مع مسباق.",
       steps: [
         { num: "01", title: "الاكتشاف", desc: "التقييم وتحديد الأهداف." },
         { num: "02", title: "البداية", desc: "معلم وخطة تعلم شخصية." },
@@ -983,26 +1006,48 @@ export const ar: Dict = {
       ],
     },
     teachers: {
-      title: "تعرف على معلميك.",
-      sub: "مؤهلون ومنتقون لخُلقهم بقدر ما لعلمهم.",
+      title: "فريقنا من المعلمين المؤهلين.",
+      sub: "تعرف على فريقنا المتفاني من المعلمين، الملتزمين بتقديم تعليم عالي الجودة في العلوم الإسلامية والدراسات القرآنية واللغة العربية والمواد الأكاديمية الأخرى.",
       items: [
         {
-          name: "أ. خديجة",
-          specialty: "القرآن والتجويد",
-          creds: "إجازة برواية حفص · ٨ سنوات في تعليم الأطفال والكبار",
-          quote: "كل طفل يستطيع أن يحب القرآن. مهمتي أن أثبت ذلك في كل حصة.",
+          name: "أ. لقمان",
+          gender: "male",
+          creds: "دكتوراه (قيد الإنجاز)",
         },
         {
-          name: "أ. يوسف",
-          specialty: "الحفظ والقراءات",
-          creds: "مجاز في القراءات · مرشد تحفيظ",
-          quote: "الحفظ ليس موهبة، بل نظام وصبر ومجالسة يومية.",
+          name: "أ. محسنة",
+          gender: "female",
+          creds: "بكالوريوس في اللغة العربية",
         },
         {
-          name: "أ. مريم",
-          specialty: "العربية والعلوم الشرعية",
-          creds: "بكالوريوس لغة عربية · مصممة مناهج",
-          quote: "اللغة تفتح الأبواب، والعربية تفتح باب القرآن نفسه.",
+          name: "أ. بدر الدين",
+          gender: "male",
+          creds: "ماجستير في الشريعة",
+        },
+        {
+          name: "أ. عبد المؤمن",
+          gender: "male",
+          creds: "حاصل على إجازة في حفظ القرآن",
+        },
+        {
+          name: "أ. صديق",
+          gender: "male",
+          creds: "حاصل على إجازة في القراءات السبع",
+        },
+        {
+          name: "أ. آمنة",
+          gender: "female",
+          creds: "",
+        },
+        {
+          name: "أ. عبد اللطيف",
+          gender: "male",
+          creds: "حاصل على بكالوريوس العلوم",
+        },
+        {
+          name: "أ. عبد المجيب",
+          gender: "male",
+          creds: "بكالوريوس في القانون المشترك",
         },
       ],
     },
@@ -1022,7 +1067,7 @@ export const ar: Dict = {
       ],
     },
     why: {
-      title: "لماذا تختار العائلات مسباك.",
+      title: "لماذا تختار العائلات مسباق.",
       items: [
         { title: "معلمون مؤهلون", desc: "نختار المعلمين لعلمهم ومهارتهم في التدريس وخُلقهم. ويحمل كثير منهم الإجازة وشهادات جامعية." },
         { title: "خطط تعلم شخصية", desc: "كل طالب يبدأ بخطة مبنية على مستواه وأهدافه وإيقاعه." },
@@ -1045,7 +1090,7 @@ export const ar: Dict = {
     programs: "البرامج",
     academy: "الأكاديمية",
     contact: "تواصل معنا",
-    rights: "أكاديمية مسباك العالمية. جميع الحقوق محفوظة.",
+    rights: "أكاديمية مسباق العالمية. جميع الحقوق محفوظة.",
     whatsappLabel: "واتساب",
     follow: "تابعنا",
     privacy: "سياسة الخصوصية",
@@ -1517,26 +1562,48 @@ export const fr: Dict = {
       ],
     },
     teachers: {
-      title: "Rencontrez vos professeurs.",
-      sub: "Qualifiés, vérifiés, et choisis autant pour leur caractère que pour leur savoir.",
+      title: "Notre équipe de tuteurs qualifiés.",
+      sub: "Découvrez notre équipe dévouée de tuteurs, engagés à offrir un enseignement de qualité en sciences islamiques, études coraniques, langue arabe et autres matières académiques.",
       items: [
         {
-          name: "Oust. Khadija",
-          specialty: "Coran & Tajwid",
-          creds: "Ijazah en Hafs · 8 ans d'enseignement enfants et adultes",
-          quote: "Chaque enfant peut aimer le Coran. Mon travail : le prouver, cours après cours.",
+          name: "Oust. Luqman",
+          gender: "male",
+          creds: "Doctorat en cours",
         },
         {
-          name: "Oust. Youssouf",
-          specialty: "Hifz & Qiraat",
-          creds: "Certifié en Qiraat · Mentor de mémorisation",
-          quote: "La mémorisation n'est pas un don. C'est un système, de la patience et une compagnie quotidienne.",
+          name: "Oust. Muhsinah",
+          gender: "female",
+          creds: "Licence en langue arabe",
         },
         {
-          name: "Oust. Maryam",
-          specialty: "Arabe & sciences islamiques",
-          creds: "Licence en langue arabe · Conceptrice de programmes",
-          quote: "La langue ouvre des portes. L'arabe ouvre la porte du Coran lui-même.",
+          name: "Oust. Badirudeen",
+          gender: "male",
+          creds: "Master en droit de la Charia",
+        },
+        {
+          name: "Oust. Abdulmumin",
+          gender: "male",
+          creds: "Titulaire d'une Ijazah en mémorisation du Coran",
+        },
+        {
+          name: "Oust. Sideeq",
+          gender: "male",
+          creds: "Titulaire d'une Ijazah dans les sept Qiraat",
+        },
+        {
+          name: "Oust. Aminah",
+          gender: "female",
+          creds: "",
+        },
+        {
+          name: "Oust. Abdullateef",
+          gender: "male",
+          creds: "Titulaire d'une Licence en sciences (B.Sc.)",
+        },
+        {
+          name: "Oust. Abdulmujeeb",
+          gender: "male",
+          creds: "Licence en droit combiné",
         },
       ],
     },

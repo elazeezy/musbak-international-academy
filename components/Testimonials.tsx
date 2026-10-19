@@ -178,7 +178,7 @@ export function Testimonials() {
 
           <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-[#6B8494]">
             {isArabic
-              ? "قصص وتجارب حقيقية من مجتمع مسباك العالمي."
+              ? "قصص وتجارب حقيقية من مجتمع مسباق العالمي."
               : "Real stories from our global learning community."}
           </p>
         </motion.div>

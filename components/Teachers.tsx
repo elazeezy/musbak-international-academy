@@ -59,29 +59,68 @@ function CheckIcon() {
   );
 }
 
-function UserIcon() {
+function MaleIcon() {
+  // Head wearing a kufi/taqiyah cap, with shoulders.
   return (
     <svg
       viewBox="0 0 64 64"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.5"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className="h-20 w-20"
     >
-      <circle cx="32" cy="23" r="11" />
-      <path d="M12 55c2.5-12 10-18 20-18s17.5 6 20 18" />
+      {/* Kufi cap */}
+      <path d="M22 21c0-7 4-12 10-12s10 5 10 12" />
+      <path d="M19 21h26" />
+      {/* Face below the cap */}
+      <path d="M24 21v5c0 4.8 3.6 8.5 8 8.5s8-3.7 8-8.5v-5" />
+      {/* Shoulders */}
+      <path d="M14 55c2-10 8-15 18-15s16 5 18 15" />
     </svg>
   );
 }
 
-const TEACHER_PHOTOS: (string | null)[] = [null, null, null, null, null, null];
+function FemaleIcon() {
+  // Face framed by a hijab, with shoulders.
+  return (
+    <svg
+      viewBox="0 0 64 64"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-20 w-20"
+    >
+      {/* Hijab drape */}
+      <path d="M32 9c-9 0-15 7-15 17 0 5.5 1.8 9.7 4.6 12.7L18 55h28l-3.6-16.3C45.2 35.7 47 31.5 47 26c0-10-6-17-15-17Z" />
+      {/* Face opening */}
+      <path d="M32 15c-6 0-9.2 5-9.2 11S26 37 32 37s9.2-5 9.2-11S38 15 32 15Z" />
+    </svg>
+  );
+}
+
+const TEACHER_PHOTOS: (string | null)[] = [
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+];
 
 function TeacherPlaceholder({
   index,
   name,
+  gender,
 }: {
   index: number;
   name: string;
+  gender: string;
 }) {
   const gradients = [
     "from-[#0B416D] via-[#07518B] to-[#35B8FF]",
@@ -109,7 +148,7 @@ function TeacherPlaceholder({
       <div className="absolute bottom-[18%] left-1/2 flex -translate-x-1/2 items-center justify-center text-white/80">
         <div className="relative">
           <div className="absolute left-1/2 top-[7px] h-20 w-20 -translate-x-1/2 rounded-full bg-white/10 blur-xl" />
-          <UserIcon />
+          {gender === "female" ? <FemaleIcon /> : <MaleIcon />}
         </div>
       </div>
 
@@ -299,6 +338,7 @@ export function Teachers() {
                 <TeacherPlaceholder
                   index={previousIndex}
                   name={previousTeacher.name}
+                  gender={previousTeacher.gender}
                 />
               )}
 
@@ -324,6 +364,7 @@ export function Teachers() {
                 <TeacherPlaceholder
                   index={nextIndex}
                   name={nextTeacher.name}
+                  gender={nextTeacher.gender}
                 />
               )}
 
@@ -385,6 +426,7 @@ export function Teachers() {
                     <TeacherPlaceholder
                       index={active}
                       name={teacher.name}
+                      gender={teacher.gender}
                     />
                   )}
 
@@ -418,20 +460,11 @@ export function Teachers() {
                     {teacher.name}
                   </h3>
 
-                  <p className="mt-2 text-sm font-semibold text-[#087CC1]">
-                    {teacher.specialty}
-                  </p>
-
-                  <p className="mt-1 text-xs leading-5 text-[#71899A]">
-                    {teacher.creds}
-                  </p>
-
-                  {/* Quote */}
-                  <blockquote className="mt-7 border-s border-[#35B8FF]/60 ps-5">
-                    <p className="text-sm leading-6 text-[#526F82] sm:text-[15px]">
-                      “{teacher.quote}”
+                  {teacher.creds ? (
+                    <p className="mt-3 text-sm font-semibold leading-6 text-[#087CC1]">
+                      {teacher.creds}
                     </p>
-                  </blockquote>
+                  ) : null}
 
                   {/* Credentials */}
                   <div className="mt-7 grid gap-2 sm:grid-cols-2">

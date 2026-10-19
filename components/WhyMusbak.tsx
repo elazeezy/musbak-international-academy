@@ -99,7 +99,7 @@ export function WhyMusbak() {
             <span className="h-2 w-2 rounded-full bg-[#35B8FF]" />
 
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#17639A] sm:text-xs">
-              {isArabic ? "لماذا مسباك؟" : "WHY MUSBAK"}
+              {isArabic ? "لماذا مسباق؟" : "WHY MUSBAK"}
             </span>
 
             <span className="h-2 w-2 rounded-full bg-[#35B8FF]" />

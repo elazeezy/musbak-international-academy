@@ -248,7 +248,7 @@ export function FAQ() {
 
                 <p className="mt-1.5 max-w-md text-xs leading-5 text-white/50">
                   {isArabic
-                    ? "تواصل معنا وسيساعدك فريق مسباك في معرفة الخطوة المناسبة لك."
+                    ? "تواصل معنا وسيساعدك فريق مسباق في معرفة الخطوة المناسبة لك."
                     : "Reach out and the Musbak team can help you find the right next step."}
                 </p>
               </div>

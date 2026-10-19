@@ -844,7 +844,7 @@ export function PortalPreview() {
             <span className="h-2 w-2 rounded-full bg-[#35B8FF]" />
 
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#17639A] sm:text-xs">
-              {isArabic ? "منصة مسباك" : "THE MUSBAK PLATFORM"}
+              {isArabic ? "منصة مسباق" : "THE MUSBAK PLATFORM"}
             </span>
 
             <span className="h-2 w-2 rounded-full bg-[#35B8FF]" />

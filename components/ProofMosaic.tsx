@@ -329,14 +329,24 @@ export function ProofMosaic() {
     },
 
     {
-      type: "placeholder",
-      label: isArabic ? "القرآن والتعلم" : "Qur’an learning",
+      type: "image",
+      src: "/images/proof-6.jpg",
+      label: isArabic
+        ? "القرآن والتعلم"
+        : lang === "fr"
+          ? "Apprentissage du Coran"
+          : "Qur’an learning",
       className: "",
     },
 
     {
-      type: "placeholder",
-      label: isArabic ? "مجتمع مسباك" : "The Musbak community",
+      type: "image",
+      src: "/images/proof-7.jpg",
+      label: isArabic
+        ? "مجتمع مسباق"
+        : lang === "fr"
+          ? "La communauté Musbak"
+          : "The Musbak community",
       className: "lg:col-span-2",
     },
   ];
@@ -378,7 +388,7 @@ export function ProofMosaic() {
 
               <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#17639A] sm:text-xs">
                 {isArabic
-                  ? "داخل تجربة مسباك"
+                  ? "داخل تجربة مسباق"
                   : lang === "fr"
                     ? "AU CŒUR DE MUSBAK"
                     : "INSIDE MUSBAK"}

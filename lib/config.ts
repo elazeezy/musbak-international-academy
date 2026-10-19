@@ -11,10 +11,10 @@ const vslLocal: Partial<Record<Lang, LocalVideo>> = {
 
 export const site = {
   name: "Musbak International Academy",
-  nameAr: "أكاديمية مسباك العالمية",
+  nameAr: "أكاديمية مسباق العالمية",
   // Canonical site URL — single source of truth for metadata, sitemap, JSON-LD.
   // Swap to the custom domain here when it's purchased.
-  url: "https://musbak-international-academy.vercel.app",
+  url: "https://musbakacademy.com",
   // Primary WhatsApp line — used by all CTA buttons (country code + number, no "+")
   whatsapp: "966599748264",
   whatsappDisplay: "+966 59 974 8264",

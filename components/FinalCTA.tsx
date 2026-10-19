@@ -138,7 +138,7 @@ export function FinalCTA() {
 
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/70 sm:text-[15px]">
             {isArabic
-              ? "تعلم مع معلّم، اختبر تجربة تعليمية حقيقية، وابدأ رحلتك مع مسباك."
+              ? "تعلم مع معلّم، اختبر تجربة تعليمية حقيقية، وابدأ رحلتك مع مسباق."
               : "Meet a tutor. Experience a real class. Begin your learning journey with Musbak."}
           </p>
 
